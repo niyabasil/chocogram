@@ -1,0 +1,76 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftWrap
+ */
+?>
+<?php
+
+use Amasty\GiftWrap\Api\SaleData\WrapInterface;
+
+/** @var \Amasty\GiftWrap\Block\Checkout\Cart\Wrap\ListWrap $block */
+?>
+
+<div class="checkoutWrapCardInfo checkout-gift-wrapper" id="checkoutWrapCardInfo">
+    <div class="step-title">Gift Wrap &amp; Card Option</div>
+    <?php if ($block->getExistingWraps()): ?>
+        <table class="amwrap-wrap-list checkout-gift_wrapper-selected">
+            <tbody>            
+            <?php foreach ($block->getExistingWraps() as $existingWrap): ?>
+            <tr class="amwrap-item-block">                
+                <td class="amwrap-name">
+                    <?php
+                        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                        $resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
+                        $connection = $resource->getConnection(); 
+                        $wrapsql = "SELECT image FROM amasty_giftwrap_wrap_store WHERE wrap_id = '".$existingWrap[WrapInterface::WRAP_ID]."'";
+                        $cardsql = "SELECT image FROM amasty_giftwrap_message_card_store WHERE message_card_id = '".$existingWrap[WrapInterface::CARD_ID]."'";
+                        $wrapImgs = $connection->fetchAll($wrapsql);
+                        $cardImgs = $connection->fetchAll($cardsql);
+                        //print_r($result); 
+                        foreach ($wrapImgs as $wrapImg) {
+                            $wrapperImg = $wrapImg['image'];  
+                            $wrapperImg = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA).'amasty/giftwrap/'.$wrapperImg;  
+                    ?>    
+                    <span class="amwrap-img col-image" style="padding-right:15px;"><img width="75px" height="75px" src="<?= $wrapperImg ?>" alt="<?= $block->escapeHtml($block->getWrapName($existingWrap[WrapInterface::WRAP_ID])) ?>" /></span>
+                        <?php } ?> 
+                    <?php
+                        foreach ($cardImgs as $cardImg) {
+                            $MsgCardImg = $cardImg['image']; 
+                            $MsgCardImg = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA).'amasty/giftwrap/'.$MsgCardImg;  
+                    ?>    
+                    <span class="amwrap-img col-image"><img width="75px" height="75px" src="<?= $MsgCardImg ?>" alt="<?= $block->escapeHtml($block->getCardName($existingWrap[WrapInterface::CARD_ID])) ?>" /></span>
+                        <?php } ?>
+                </td> 
+            </tr>
+            <tr class="amwrap-item-block">
+                <td class="amwrap-name"> 
+                    <div>
+                    <?php foreach ($block->getItemsInfo($existingWrap[WrapInterface::ID]) as $itemInfo): ?>
+                         <strong class="wrap-chck-txt">Product Name: </strong>
+                         <span class="">
+                             <span class="amwrap-name"><strong><?= $block->escapeHtml($block->getItemName($itemInfo['item_id'])) ?></strong>
+                                 <span class=""><?= ' - '.(int)$itemInfo['qty'].' item(s)' ?></span>
+                             </span>
+                         </span>
+                     <?php endforeach; ?>
+                    </div>   
+                    <div>
+                    <strong class="wrap-chck-txt">Gift Wrap/Gift Card: </strong>
+                    <strong><?= $block->escapeHtml($block->convertPrice($existingWrap[WrapInterface::BASE_PRICE] + $existingWrap[WrapInterface::BASE_CARD_PRICE])) ?></strong>
+                    </div>                      
+                    <?php if (!empty($existingWrap[WrapInterface::GIFT_MESSAGE])): ?>
+                      <div>
+                      <strong class="wrap-chck-txt">Gift Message: </strong>
+                      <span class="amGiftMsg"><?= /** @noEsape */ nl2br($block->escapeHtml($existingWrap[WrapInterface::GIFT_MESSAGE] ?? '')) ?></span>
+                      </div>
+                    <?php endif; ?> 
+                </td>
+            </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php endif; ?>
+    
+</div>

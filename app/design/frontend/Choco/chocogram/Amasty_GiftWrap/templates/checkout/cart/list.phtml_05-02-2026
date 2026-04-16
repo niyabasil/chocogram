@@ -1,0 +1,105 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_GiftWrap
+ */
+?>
+<?php
+
+use Amasty\GiftWrap\Api\SaleData\WrapInterface;
+
+/** @var \Amasty\GiftWrap\Block\Checkout\Cart\Wrap\ListWrap $block */
+?>
+
+<div data-amwrap-js="amwrap-added-list">
+    <?php if ($block->getExistingWraps()): ?>
+        <p class="amwrap-info-block">
+            <?=  $block->escapeHtml(__('Added Gift Wrap(s) & Gift Card(s)')) ?>
+        </p>
+        <table class="amwrap-wrap-list amwrap-list">
+            <thead>
+                <tr class="first last">
+                    <th class="a-center" style="text-align: center;">Gift Wrap</th>
+                    <th class="a-center">Gift Card</th>
+                    <th class="a-center">Gift Message</th>
+                    <th class="a-center">Wrapped Items</th>
+                    <th class="a-center">Price</th>
+                    <th class="a-center">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>            
+            <?php foreach ($block->getExistingWraps() as $existingWrap): ?>
+            <tr class="amwrap-item-block">
+                
+                <td class="amwrap-name" style="text-align: center; width: 120px;">
+                    <?php
+                        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                        $resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
+                        $connection = $resource->getConnection(); 
+                        $sql = "SELECT image FROM amasty_giftwrap_wrap_store WHERE wrap_id = '".$existingWrap[WrapInterface::WRAP_ID]."'";
+                        $wrapImgs = $connection->fetchAll($sql);
+                        //print_r($result); 
+                        foreach ($wrapImgs as $wrapImg) {
+                            $wrapperImg = $wrapImg['image'];  
+                            $wrapperImg = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA).'amasty/giftwrap/'.$wrapperImg;  
+                    ?>    
+                    <span class="amwrap-img"><img width="75px" height="75px" src="<?= $wrapperImg ?>" alt="<?= $block->escapeHtml($block->getWrapName($existingWrap[WrapInterface::WRAP_ID])) ?>" /></span>
+                        <?php } ?>
+                    <span class="amwrapitemName"><?= $block->escapeHtml($block->getWrapName($existingWrap[WrapInterface::WRAP_ID])) ?></span>
+                </td>
+                
+                <td class="amwrap-name" style="text-align: center; width: 120px;">
+                    <?php
+                        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                        $resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
+                        $connection = $resource->getConnection(); 
+                        $sql = "SELECT image FROM amasty_giftwrap_message_card_store WHERE message_card_id = '".$existingWrap[WrapInterface::CARD_ID]."'";
+                        $cardImgs = $connection->fetchAll($sql);
+                        //print_r($result); 
+                        foreach ($cardImgs as $cardImg) {
+                            $MsgCardImg = $cardImg['image']; 
+                            $MsgCardImg = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA).'amasty/giftwrap/'.$MsgCardImg;  
+                    ?>    
+                    <span class="amwrap-img"><img width="75px" height="75px" src="<?= $MsgCardImg ?>" alt="<?= $block->escapeHtml($block->getCardName($existingWrap[WrapInterface::CARD_ID])) ?>" /></span>
+                        <?php } ?>                    
+                    <?php if (!empty($existingWrap[WrapInterface::CARD_ID])): ?>                    
+                    <span class="amwrapitemName"><?= $block->escapeHtml($block->getCardName($existingWrap[WrapInterface::CARD_ID])) ?></span>
+                    <?php endif; ?>
+                </td> 
+                
+                <td class="amwrap-name amGiftMsg" style="text-align: center;">
+                  <?php if (!empty($existingWrap[WrapInterface::GIFT_MESSAGE])): ?>
+                    <?= /** @noEsape */ nl2br($block->escapeHtml($existingWrap[WrapInterface::GIFT_MESSAGE] ?? '')) ?>
+                  <?php endif; ?>
+                </td>   
+                
+                <td class="amwrap-product-list amwrap-list" style="text-align: center;">
+                    <?php foreach ($block->getItemsInfo($existingWrap[WrapInterface::ID]) as $itemInfo): ?>
+                        <span class="">
+                            <span class="amwrap-name"><?= $block->escapeHtml($block->getItemName($itemInfo['item_id'])) ?>
+                                <span class=""><?= ' - '.(int)$itemInfo['qty'].' item(s)' ?></span>
+                            </span>
+                        </span>
+                    <?php endforeach; ?>
+                </td>
+               
+                <td class="amwrap-price-block" style="text-align: center;">
+                    <?= $block->getPackPriceHtml((int) $existingWrap[WrapInterface::WRAP_ID], (int) $existingWrap[WrapInterface::CARD_ID]) ?>
+                </td>
+                <td class="amwrap-actions-block">
+                    <?php $id = $block->escapeHtml($existingWrap[WrapInterface::ID]) ?>
+                    <button class="amwrap-edit-btn"
+                            data-amwrap-js="edit-step"
+                            data-amwrap-popup='open'
+                            data-amwrap-loader='trigger'
+                            data-amwrap-id="<?= $block->escapeHtml($id) ?>">
+
+                    </button>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php endif; ?>
+</div>

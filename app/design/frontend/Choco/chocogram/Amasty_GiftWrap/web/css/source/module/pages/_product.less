@@ -1,0 +1,183 @@
+//
+//  Base Styles
+//  _____________________________________
+
+//
+//  Common
+//  -------------------------------------
+
+& when (@media-common = true) {
+    .amwrap.gift-wrap {
+        padding: @amwrap__indent__l 0 @amwrap__indent__xl * 2;
+    }
+
+    .amwrap-make-gift {
+        & {
+            .am-flex(none, none, wrap);
+
+            z-index: 2;
+            margin: 0 0 30px 0;
+            background: #fff;
+            color: #333;
+        }
+
+        > .amwrap-text {
+            ._am-slide-down;
+
+            display: none;
+            margin: 0;
+            padding: @amwrap__indent__l 0 @amwrap__indent__l @amwrap__indent__xxl;
+            width: 100%;
+            word-break: break-word;
+        }
+
+        > .amwrap-text.-active {
+            display: block;
+            border-bottom: 1px solid #c1c1c1;
+        }
+    }
+
+    .amwrap-textarea-block {
+        & {
+            padding: 35px 0 0;
+        }
+
+        .amwrap-label {
+            display: block;
+            padding: 0 0 @amwrap__indent;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .amwrap-textarea {
+            & {
+                box-sizing: border-box;
+                padding: @amwrap__indent;
+                border: 1px solid @amwrap-line__color;
+                border-radius: 2px;
+            }
+
+            &:focus {
+                border: 1px solid @amwrap__active__color;
+                box-shadow: none;
+            }
+
+            &::placeholder {
+                color: #adadad;
+                font-style: italic;
+            }
+        }
+
+        &.-hidden {
+            display: none;
+        }
+    }
+
+    .amwrap-selected-items {
+        & {
+            .am-flex(none, center);
+
+            margin: 0 0 35px 0;
+            padding: @amwrap__indent / 2 @amwrap__indent;
+            max-width: 360px;
+            background: #efefef;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+
+        .amwrap-title {
+            margin: 0;
+            /*max-width: 75%; */
+        }
+
+        .amwrap-edit-btn {
+            & {
+                margin: 0 0 0 auto;
+            }
+
+            &:hover:after {
+                filter: invert(19%) sepia(98%) saturate(2559%) hue-rotate(190deg) brightness(101%) contrast(98%);
+            }
+        }
+
+        &:not(.-active) {
+            display: none;
+        }
+    }
+
+    .amwrap-existing-section {
+        & {
+            .am-flex(none, none, wrap);
+
+            padding: 0 0 @amwrap__indent 0;
+        }
+
+        &:not(.-active) {
+            display: none;
+        }
+
+        .amwrap-btn {
+            & {
+                box-sizing: border-box;
+                margin: 0 @amwrap__indent @amwrap__indent 0;
+                padding: @amwrap__indent__l @amwrap__indent;
+                max-width: 155px;
+                width: 100%;
+                border-radius: 2px;
+                box-shadow: @amwrap__box-shadow;
+                color: #333;
+            }
+
+            &:hover {
+                box-shadow: 0 3px 5px #a3acb7;
+            }
+        }
+
+        .amwrap-text {
+            text-align: center;
+            word-break: break-all;
+            word-break: break-word;
+        }
+
+        .amwrap-input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .amwrap-btn.-new {
+            &:before {
+                .am-flex(center, center);
+
+                box-sizing: border-box;
+                margin: 0 @amwrap__indent / 2 0 0;
+                width: @amwrap__indent__l;
+                height: @amwrap__indent__l;
+                border: 1px solid transparent;
+                border-radius: 50%;
+                background: @amwrap__active__color;
+                color: #fff;
+                content: '+';
+                line-height: normal;
+            }
+        }
+    }
+    .product-block-gift-save-msg {
+        margin-bottom: 10px;
+        background-color: #996633 !important;
+        padding: 10px 14px;    
+        width: 300px;         
+        .giftwrap-link-btn {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 24px;            
+            img {
+               padding-top: 0px;
+               float: left;
+               padding-right: 8px;
+               width: 25px;
+               margin-top: -1px;
+            }
+        }
+    }    
+}

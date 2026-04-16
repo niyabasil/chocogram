@@ -1,0 +1,37 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */
+    /** @var \Amasty\GiftWrap\Block\Product\View\Wrap $block */
+    /** @var \Amasty\GiftWrap\Model\Wrapper\Wrap $wrapper */
+    /** @var \Amasty\GiftWrap\Model\SaleData\AbstractWrap|null $selectedWrap */
+
+    $selectedWrap = $block->getSelectedWrap();
+?>
+<h3 class="amwrap-title"><?= $block->escapeHtml('Choose the Perfect Gift Wrap') ?></h3>
+<ul class="amwrap-slider-block"
+    data-amwrap-js="slide-list"
+    data-mage-init='{"amwrapSlick": {}}'>
+    <?php foreach ($block->getWrappers() as $wrapper): ?>
+        <?php $currentSelected = $selectedWrap && $selectedWrap->getAmGiftWrapWrapId() == $wrapper->getEntityId() ?>
+        <?php $defaultWrap = $wrapper->getEntityId() == 1; ?>
+        <li class="amwrap-slide <?= $currentSelected ? '-active' : '' ?> amgiftWrap" data-amwrap-js="item"
+            data-amwrap-id="<?= (int)$wrapper->getEntityId(); ?>">
+            <?php if ($src = $block->getImageSrc($wrapper->getImage())): ?>
+                <img class="amwrap-img"
+                     alt="<?= $block->escapeHtml($wrapper->getName()); ?>"
+                     src="<?= $block->escapeUrl($src); ?>"
+                     data-amwrap-js="img"/>
+            <?php endif; ?>
+                <input class="amwrap-check" data-amwrap-js="checkbox" type="radio" id="giftbox_paper" name="amwrap[wrap_id]" value="<?= (int)$wrapper->getEntityId(); ?>" <?php if(!empty($currentSelected) || $defaultWrap) echo 'checked'; ?> />
+            <label class="label" for="<?= $block->escapeHtml($wrapper->getName()); ?>"></label>
+            <p class="amwrap-name" data-amwrap-js="name"><?= $block->escapeHtml($wrapper->getName()); ?></p>
+            <?php if($wrapper->getPrice() > 0) { ?>
+                <p class="amwrap-price" data-amwrap-js="price"><?= $block->getPriceHtml($wrapper); ?></p>
+                <input type="hidden" name="paperPrice" id="paperPrice_<?php echo $wrapper->getEntityId(); ?>" value="<?php echo $wrapper->getPrice(); ?>" /><?php }; ?>
+            <p class="amwrap-description" data-amwrap-js="desc"><?= $block->escapeHtml($wrapper->getDescription()); ?></p>            
+        </li>
+    <?php endforeach; ?>
+</ul>

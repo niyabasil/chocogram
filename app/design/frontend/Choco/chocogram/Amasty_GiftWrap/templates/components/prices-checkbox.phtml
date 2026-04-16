@@ -1,0 +1,25 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */
+    /** @var Magento\Framework\View\Element\Template $block */
+    /** @var \Amasty\GiftWrap\Model\SaleData\AbstractWrap|null $selectedWrap */
+    /** @var Magento\Framework\Escaper $escaper */
+
+    $selectedWrap = $block->getSelectedWrap();
+?>
+
+<!-- <label class="amwrap-checkbox-block">
+    <input type="checkbox"
+           name="amwrap[is_receipt_hidden]"
+           class="amwrap-input"
+           value="1"
+           <?= !$selectedWrap || $selectedWrap->getAmGiftWrapIsReceiptHidden() ? 'checked' : '' ?>
+           data-amwrap-js="receipt-hidden">
+    <i class="amwrap-mark"></i>
+    <span class="amwrap-text">
+        <?= $escaper->escapeHtml(__('Hidden prices on the recipient’s receipt')) ?>
+    </span>
+</label> -->

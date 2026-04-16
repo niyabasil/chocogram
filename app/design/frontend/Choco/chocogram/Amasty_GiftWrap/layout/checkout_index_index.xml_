@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="amasty_wrap_price" />
+    <head>
+        <css src="Amasty_Base::vendor/slick/amslick.min.css"/>
+    </head>
+    <body>
+        <referenceBlock name="checkout.root">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="billing-step" xsi:type="array">
+                                            <item name="component" xsi:type="string">uiComponent</item>
+                                            <item name="children" xsi:type="array">
+                                                <item name="payment" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="afterMethods" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="amgiftwrap" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Amasty_GiftWrap/js/checkout/button</item>
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="title" xsi:type="string" translate="true">Add Gift Wrap</item>
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                                <item name="sidebar" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="summary" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="totals" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="before_grandtotal" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="am-gift-wrap-order-level" xsi:type="array">
+                                                                    <item name="component"  xsi:type="string">Amasty_GiftWrap/js/checkout/cart/totals</item>
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="title" xsi:type="string" translate="true">Gift Wrap</item>
+                                                                        <item name="level" xsi:type="string">order</item>
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                                <item name="wrap_items" xsi:type="array">
+                                                    <item name="component" xsi:type="string">Amasty_GiftWrap/js/checkout/summary/cart-items</item>
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="details" xsi:type="array">
+                                                            <item name="component" xsi:type="string">Amasty_GiftWrap/js/checkout/summary/item/details</item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+
+        <referenceContainer name="after.body.start">
+            <block class="Magento\Framework\View\Element\Template"
+                   template="Amasty_GiftWrap::components/popup.phtml"
+                   name="amgiftwrap.popup.container"
+                   after="-">
+                <block class="Magento\Framework\View\Element\Template" name="amgiftwrap.cart.chosen.template"
+                    as="chosen_template"
+                    template="Amasty_GiftWrap::js_templates/wrap/choosen/item.phtml">
+                    <arguments>
+                        <argument name="cache_lifetime" xsi:type="number">86400</argument>
+                    </arguments>
+                </block>
+                <block class="Amasty\GiftWrap\Block\Checkout\Cart\WrapTitle" name="amgiftwrap.cart.title"
+                    as="title_template"
+                    template="Amasty_GiftWrap::js_templates/wrap/title.phtml">
+                    <arguments>
+                        <argument name="cache_lifetime" xsi:type="number">86400</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Template" name="amgiftwrap.cart.option"
+                    as="option_list"
+                    template="Amasty_GiftWrap::checkout/cart/option_list.phtml"/>
+                <block class="Magento\Framework\View\Element\Template" name="amgiftwrap.cart.items"
+                    as="items_list"
+                    template="Amasty_GiftWrap::checkout/cart/items_block.phtml"/>
+                <block class="Amasty\GiftWrap\Block\Product\View"
+                       name="amgiftwrap.checkout.item.giftwrap.popup"
+                       as="popup"
+                       template="Amasty_GiftWrap::product/gift_wrap.phtml">
+                    <arguments>
+                        <argument name="skip_validation" xsi:type="boolean">true</argument>
+                    </arguments>
+                    <block class="Amasty\GiftWrap\Block\Product\View\Card"
+                           name="amgiftwrap.cart.toolbar"
+                           as="toolbar"
+                           template="Amasty_GiftWrap::components/toolbar.phtml"/>
+                    <block class="Amasty\GiftWrap\Block\Wrap\Existing\Load" name="amgiftwrap.product.existing.wraps"
+                        as="existing_wraps"
+                        template="Amasty_GiftWrap::components/existing_wrap/container.phtml" />
+                    <block class="Amasty\GiftWrap\Block\Product\View\Wrap" name="amgiftwrap.cart.wrap"
+                        as="wrap"
+                        template="Amasty_GiftWrap::steps/wrap.phtml"/>
+                    <block class="Amasty\GiftWrap\Block\Product\View\Card" name="amgiftwrap.cart.card"
+                        as="card"
+                        template="Amasty_GiftWrap::steps/card.phtml"/>
+                    <block class="Magento\Framework\View\Element\Template" name="amgiftwrap.cart.finish"
+                        as="finish"
+                        template="Amasty_GiftWrap::steps/finish.phtml"/>
+                    <block class="Amasty\GiftWrap\Block\Product\View\Buttons" name="amgiftwrap.cart.buttons"
+                        as="buttons"
+                        template="Amasty_GiftWrap::components/buttons_toolbar.phtml">
+                        <arguments>
+                            <argument name="save_ajax" xsi:type="boolean">true</argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+        </referenceContainer>
+
+        <block class="Magento\Framework\View\Element\Template"
+               name="amgiftwrap.prices.checkbox"
+               as="prices-checkbox"
+               template="Amasty_GiftWrap::components/prices-checkbox.phtml"/>
+    </body>
+</page>

@@ -1,0 +1,36 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */
+/**
+ * @var $block Content
+ * @var $escaper Magento\Framework\Escaper
+ * @var array $existingWrap
+ */
+
+use Amasty\GiftWrap\Block\Wrap\Existing\Content;
+?>
+
+<!-- <div data-amwrap-js="amwrap-existing-list">
+    <?php if ($block->getExistingWraps()): ?>
+        <div class="amwrap-existing-section" data-amwrap-js="choose-existing-wrap">
+            <?php foreach ($block->getExistingWraps() as $existingWrap): ?>
+            <label class="amwrap-btn -active">
+                <input class="amwrap-input"
+                       type="radio" name="amwrap[existing_wrap_id]" value="<?= (int)$existingWrap['entity_id'] ?>"
+                       data-amwrap-js="exist-action"
+                       data-amwrap-id="<?= (int) $existingWrap['entity_id'] ?>">
+                <i class="amwrap-text"><?= $escaper->escapeHtml($block->getWrapName($existingWrap['wrap_id'])) ?></i>
+            </label>
+            <?php endforeach; ?>
+            <label class="amwrap-btn -active -new">
+            <input class="amwrap-input"
+                   type="radio" name="amwrap[existing_wrap_id]"
+                   value="" data-amwrap-js="new-action">
+                <i class="amwrap-text"><?= $escaper->escapeHtml(__('New Wrap')) ?></i>
+            </label>
+        </div>
+    <?php endif; ?>
+</div> -->

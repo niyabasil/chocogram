@@ -1,0 +1,34 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */
+/**
+ * @var $block Checker
+ * @var $escaper Magento\Framework\Escaper
+ */
+
+use Amasty\GiftWrap\Block\Product\View\Checker;
+?>
+
+<div class="amwrap-make-gift">
+    <!-- <label class="amwrap-checkbox-block" data-amwrap-loader='trigger'>
+        <input type="checkbox"
+               class="amwrap-input"
+               data-amwrap-js="wrap-active"
+               data-amwrap-popup="open"
+                <?= $block->getSelectedWrap() ? 'checked' : '' ?>
+        >
+        <i class="amwrap-mark"></i>
+        <b class="amwrap-text">
+            <?= $escaper->escapeHtml(__('Make It a Gift')) ?>
+        </b>
+    </label> -->
+
+    <?php if ($block->getCustomerNote() !== ''): ?>
+    <p class="amwrap-text" data-amwrap-js="wrapper-text">
+        <?= /** @noEscape */ nl2br($escaper->escapeHtml($block->getCustomerNote())) ?>
+    </p>
+    <?php endif; ?>
+</div>

@@ -1,0 +1,32 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */ /** @var $block \Amasty\GiftWrap\Block\Product\View\Buttons */ ?>
+
+<div class="amwrap-btn-toolbar">
+    <!-- <button class="amwrap-btn -empty -hidden" data-amwrap-js="prev-step">
+        <?= $block->escapeHtml(__('Back')); ?>
+    </button>
+    <button class="amwrap-btn -primary -active saveWrapCard" data-amwrap-js="next-step">
+        <?= $block->escapeHtml(__('Next')); ?>
+        <span class="amwrap-chevron -right"></span>
+    </button> -->
+    <button class="amwrap-btn -fill -hidden -active saveWrapCard" style="display: block;"
+            data-amwrap-js="finish-step"
+            data-amwrap-popup='close'
+            type="button"
+            <?php if ($block->isSaveAjax()): ?>
+                data-mage-init='{
+                    "amwrapSave": {
+                        "wrapItemsUrl":"<?= $block->escapeUrl($block->getSaveUrl()) ?>",
+                        "updateWrapUrl":"<?= $block->escapeUrl($block->getUpdateWrapUrl()) ?>"
+                    }
+                 }'
+            <?php endif; ?>
+    >
+        <?= $block->escapeHtml(__('Finish')); ?>
+    </button>
+    <input name="amwrap[finish]" value="1" type="checkbox" data-amwrap-js="select-finish" hidden <?= $block->getSelectedWrap() ? 'checked' : '' ?> />
+</div>

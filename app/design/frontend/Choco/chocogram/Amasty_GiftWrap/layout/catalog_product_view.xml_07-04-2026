@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */-->
+
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="amasty_wrap_price" />
+
+    <head>
+        <css src="Amasty_Base::vendor/slick/amslick.min.css"/>
+    </head>
+    <body>
+        <referenceContainer name="product.info.form.content">
+            <block class="Amasty\GiftWrap\Block\Product\View"
+                   name="amgiftwrap.product.view"
+                   before="-"
+                   template="Amasty_GiftWrap::product/gift_wrap.phtml">
+                <arguments>
+                    <argument name="visibility" xsi:type="string">product</argument>
+                </arguments>
+                <block class="Amasty\GiftWrap\Block\Wrap\Existing\Load" name="amgiftwrap.product.existing.wraps"
+                       as="existing_wraps"
+                       template="Amasty_GiftWrap::components/existing_wrap/container.phtml" />
+                <block class="Amasty\GiftWrap\Block\Product\View\Wrap" name="amgiftwrap.product.wrap"
+                       as="wrap"
+                       template="Amasty_GiftWrap::steps/wrap.phtml"/>
+                <block class="Amasty\GiftWrap\Block\Product\View\Card" name="amgiftwrap.product.card"
+                       as="card"
+                       template="Amasty_GiftWrap::steps/card.phtml"/>
+                <block class="Amasty\GiftWrap\Block\Product\View\Buttons" name="amgiftwrap.product.buttons"
+                       as="buttons"
+                       template="Amasty_GiftWrap::components/buttons_toolbar.phtml">
+                    <arguments>
+                        <argument name="save_ajax" xsi:type="boolean">false</argument>
+                    </arguments>
+                </block>
+            </block>
+            <block class="Amasty\GiftWrap\Block\Product\View"
+                   name="amgiftwrap.product.selected.items"
+                   after="amgiftwrap.product.view"
+                   template="Amasty_GiftWrap::product/selected_items.phtml">
+                <arguments>
+                    <argument name="visibility" xsi:type="string">product</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+
+        
+
+    </body>
+</layout>

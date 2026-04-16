@@ -1,0 +1,56 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */
+    /** @var \Amasty\GiftWrap\Block\Product\View\Card $block */
+    /** @var \Amasty\GiftWrap\Model\MessageCard\MessageCard $card */
+    /** @var \Amasty\GiftWrap\Model\SaleData\AbstractWrap|null $selectedWrap */
+
+    $selectedWrap = $block->getSelectedWrap();
+?>
+
+<?php if ($block->getMessageCards()): ?>
+<h3 class="amwrap-card-title"><?= $block->escapeHtml(__("Choose the Perfect Card")); ?></h3>
+<ul style="width:100%" class="amwrap-slider-block"
+    data-amwrap-js="slide-list"
+    data-mage-init='{"amwrapSlick": {}}'>
+    <?php foreach ($block->getMessageCards() as $card): ?>
+        <?php $currentSelected = $selectedWrap && $selectedWrap->getAmGiftWrapCardId() == $card->getEntityId() ?>
+        <?php $defaultCard = $card->getEntityId() == 1 ; ?>
+        <li class="amwrap-slide <?= $currentSelected ? '-active' : '' ?> amgiftCard"
+            data-amcard-id="<?= (int)$card->getEntityId(); ?>"
+            data-amwrap-js="item">
+            <?php if ($src = $block->getImageSrc($card->getImage())): ?>
+                <img class="amwrap-img"
+                     alt="<?= $block->escapeHtml($card->getName()); ?>"
+                     src="<?= $block->escapeUrl($src); ?>"
+                     data-amwrap-js="img"
+                />
+            <?php endif; ?>
+            <input class="amwrap-check" data-amwrap-js="checkbox" type="radio" name="amwrap[card_id]" id="giftwrap_giftcard" value="<?= (int)$card->getEntityId(); ?>" <?php if(!empty($currentSelected) || $defaultCard) echo 'checked'; ?>/>
+            <label class="label" for="<?= $block->escapeHtml($card->getName()); ?>"></label>
+            <p class="amwrap-name" data-amwrap-js="name"><?= $block->escapeHtml($card->getName()); ?></p>
+            <?php if($card->getPrice() > 0) { ?> <p class="amwrap-price" data-amwrap-js="price"><?= $block->getPriceHtml($card); ?></p>
+                                                 <input type="hidden" name="cardPrice" id="cardPrice_<?php echo $card->getEntityId(); ?>" value="<?php echo $card->getPrice(); ?>"> <?php }; ?>
+        </li>
+    <?php endforeach; ?>
+</ul>
+<?php endif; ?>
+
+<div class="amwrap-textarea-block <?= /** @noEscape */ $block->getIsAllowedMessageWithoutCard() ? '-hidden' : ''; ?>"
+     data-amwrap-js="message-wrap">
+    <label class="amwrap-label">
+        <?= $block->escapeHtml(__('Add Gift Message')) ?>
+    </label>
+    <textarea class="amwrap-textarea"
+              name="amwrap[gift_message]"
+              title="<?= $block->escapeHtml(__('Add Gift Message')); ?>"
+              rows="2"
+              data-amwrap-js="card-message"
+              placeholder="<?= $block->escapeHtml($block->getMessagePlaceholder()); ?>"><?= $block->escapeHtml($selectedWrap && $selectedWrap->getAmGiftWrapGiftMessage() ? $selectedWrap->getAmGiftWrapGiftMessage() : '') ?></textarea>
+
+</div>
+
+<?= $block->getLayout()->getBlock('amgiftwrap.prices.checkbox')->toHtml(); ?>

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+    <referenceBlock name="amgiftwrap.product.view" remove="true"/>
+    <referenceBlock name="amgiftwrap.product.selected.items" remove="true"/>
+        <referenceContainer name="product.info.options.wrapper.bottom">
+            <block class="Amasty\GiftWrap\Block\Product\View"
+                   name="amgiftwrap.product.view.additional"
+                   before="product.info.addtocart.additional"
+                   template="Amasty_GiftWrap::product/gift_wrap.phtml">
+                <arguments>
+                    <argument name="visibility" xsi:type="string">product</argument>
+                </arguments>
+                <block class="Amasty\GiftWrap\Block\Product\View\Checker" name="amgiftwrap.product.checker.additional"
+                       as="checker"
+                       template="Amasty_GiftWrap::components/make_checker.phtml"/>
+                <block class="Amasty\GiftWrap\Block\Wrap\Existing\Load" name="amgiftwrap.cart.existing.wraps"
+                       as="existing_wraps"
+                       template="Amasty_GiftWrap::components/existing_wrap/container.phtml" />
+                <block class="Amasty\GiftWrap\Block\Product\View\Card" name="amgiftwrap.product.toolbar.additional"
+                       as="toolbar"
+                       template="Amasty_GiftWrap::components/toolbar.phtml"/>
+                <block class="Amasty\GiftWrap\Block\Product\View\Wrap" name="amgiftwrap.product.wrap.additional"
+                       as="wrap"
+                       template="Amasty_GiftWrap::steps/wrap.phtml"/>
+                <block class="Amasty\GiftWrap\Block\Product\View\Card" name="amgiftwrap.product.card.additional"
+                       as="card"
+                       template="Amasty_GiftWrap::steps/card.phtml"/>
+                <block class="Magento\Framework\View\Element\Template" name="amgiftwrap.product.finish.additional"
+                       as="finish"
+                       template="Amasty_GiftWrap::steps/finish.phtml"/>
+                <block class="Amasty\GiftWrap\Block\Product\View\Buttons" name="amgiftwrap.product.buttons.additional"
+                       as="buttons"
+                       template="Amasty_GiftWrap::components/buttons_toolbar.phtml">
+                    <arguments>
+                        <argument name="save_ajax" xsi:type="boolean">false</argument>
+                    </arguments>
+                </block>
+            </block>
+            <block class="Amasty\GiftWrap\Block\Product\View"
+                   name="amgiftwrap.product.selected.items.additional"
+                   after="amgiftwrap.product.view.additional"
+                   template="Amasty_GiftWrap::product/selected_items.phtml">
+                <arguments>
+                    <argument name="visibility" xsi:type="string">product</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

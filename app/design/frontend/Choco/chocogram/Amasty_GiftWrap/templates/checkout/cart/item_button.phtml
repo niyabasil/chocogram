@@ -1,0 +1,19 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */ /** @var \Amasty\GiftWrap\Block\Checkout\Item\Wrap\Renderer $block */ ?>
+<div data-amwrap-js="wrap-item" data-item-id="<?= (int)$block->getItem()->getId() ?>">
+    <?php if ($block->isItemHasFreeQty()): ?>
+        <div class="amwrap-item-option">
+            <button class="amwrap-add"
+                    type="button"
+                    data-amwrap-js="wrap-button"
+                    data-amwrap-popup='open'
+                    data-item-id="<?= (int)$block->getItem()->getId() ?>">
+                <?= $block->escapeHtml(__('Add Gift Wrap + Gift Card >')) ?>
+            </button>
+        </div>
+    <?php endif; ?>
+</div>
