@@ -187,8 +187,10 @@ class WrapManagement
                         $this->storeManager->getStore()->getId()
                     );
 
+                    $qty = $this->resolveExistingWrapQty($quoteWrap);
+
                     $quoteWrap->setWrapId($wrap->getEntityId());
-                    $quoteWrap->setBasePrice($wrap->getPrice() * (int) $qtyToWrap);
+                    $quoteWrap->setBasePrice($wrap->getPrice() * $qty);
                     $quoteWrap->setWrapName($wrap->getName());
 
                     if (isset($wrapData[WrapInterface::CARD_ID])) {
@@ -197,7 +199,7 @@ class WrapManagement
                             $this->storeManager->getStore()->getId()
                         );
                         $quoteWrap->setCardId($card->getEntityId());
-                        $quoteWrap->setBaseCardPrice($card->getPrice() * (int) $qtyToWrap);
+                        $quoteWrap->setBaseCardPrice($card->getPrice() * $qty);
                     } else {
                         $quoteWrap->setCardId(null);
                         $quoteWrap->setBaseCardPrice(0);
@@ -222,6 +224,39 @@ class WrapManagement
         } else {
             $this->throwInputType();
         }
+    }
+
+    /**
+     * Derive the wrapped item quantity from the existing quote wrap's stored base_price.
+     *
+     * base_price in amasty_giftwrap_quote_wrap equals unit_wrap_price × qty.
+     * Recovering the original qty allows the updated wrap to be priced correctly
+     * when the user switches to a different wrap design.
+     *
+     * @param WrapInterface $quoteWrap
+     * @return int
+     */
+    private function resolveExistingWrapQty(WrapInterface $quoteWrap): int
+    {
+        $existingBasePrice = (float) $quoteWrap->getBasePrice();
+        $existingWrapId    = (int) $quoteWrap->getWrapId();
+
+        if ($existingBasePrice > 0 && $existingWrapId) {
+            try {
+                $oldUnitPrice = (float) $this->wrapRepository->getById(
+                    $existingWrapId,
+                    $this->storeManager->getStore()->getId()
+                )->getPrice();
+
+                if ($oldUnitPrice > 0) {
+                    return max(1, (int) round($existingBasePrice / $oldUnitPrice));
+                }
+            } catch (\Exception $e) {
+                // Old wrap design may have been deleted; fall back to qty 1.
+            }
+        }
+
+        return 1;
     }
 
     /**
