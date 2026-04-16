@@ -1,0 +1,136 @@
+//
+//  Buttons
+//  _____________________________________
+
+//
+//  Common
+//  -------------------------------------
+
+& when (@media-common = true) {
+    .amwrap-popup-block {
+        & {
+            .transition();
+            .am-scrollbar();
+
+            background: rgba(49, 49, 49, .6);
+            bottom: 0;
+            display: none;
+            left: 0;
+            padding: @amwrap__indent;
+            position: fixed;
+            right: 0;
+            top: 0;
+            z-index: 1000;
+        }
+
+        &.-active {
+            .am-flex(center, center);
+        }
+
+        .amwrap-close-btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .amwrap-popup {
+            ._am-slide-down;
+            .am-flex();
+
+            background: @color-white;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(15, 56, 89, .4);
+            box-sizing: border-box;
+            flex-direction: column;
+            height: initial;
+            margin: auto;
+            max-height: 100%;
+            max-width: 520px;
+            min-height: 100%;
+            overflow: auto;
+            padding: @amwrap__indent__l;
+            position: relative;
+            width: 100%;
+            z-index: 9;
+        }
+
+        .amwrap-existing-section {
+            margin: 0 -(@amwrap__indent / 2);
+        }
+
+        .amwrap-existing-section > .amwrap-btn {
+            margin: 0 (@amwrap__indent / 2) @amwrap__indent;
+            max-width: ~'calc(50% - @{amwrap__indent})';
+        }
+    }
+
+    .amwrap-popup-title {
+        & {
+            border-bottom: 1px solid @amwrap-line__color;
+            font-size: 18px;
+            font-weight: 600;
+            margin: @amwrap__indent 0 @amwrap__indent__xxl 0;
+            padding: 0 0 @amwrap__indent__l 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        .amwrap-description {
+            .am-word-break;
+
+            font-size: 12px;
+            font-weight: 400;
+        }
+    }
+
+    .amwrap-popup-toolbar {
+        .am-flex(flex-end, center);
+
+        flex-basis: 100%;
+    }
+
+    .-edit-wrap .amwrap-popup-title {
+        & {
+            .am-flex(center, center);
+
+            font-weight: 400;
+        }
+
+        > .amwrap-title {
+            margin: 0;
+        }
+
+        > .amwrap-description {
+            font-size: inherit;
+            font-weight: 600;
+            margin: 0;
+            padding: 0 0 0 (@amwrap__indent / 2);
+        }
+    }
+
+    .ie11 .amwrap-popup-block .amwrap-popup {
+        display: block;
+        margin: 0;
+        min-height: inherit;
+    }
+}
+
+//
+//  Tablet +
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .amwrap-popup-block {
+        .amwrap-popup {
+            min-height: 44%;
+        }
+
+        .amwrap-existing-section > .amwrap-btn {
+            max-width: ~'calc(100% / 3 - @{amwrap__indent})';
+        }
+
+        .ie11 & .amwrap-existing-section > .amwrap-btn {
+            max-width: ~'calc(100% / 3 - (@{amwrap__indent} + 1px))';
+        }
+    }
+}

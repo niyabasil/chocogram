@@ -1,0 +1,136 @@
+//
+//  Base Step Styles
+//  _____________________________________
+
+//
+//  Common
+//  -------------------------------------
+
+& when (@media-common = true) {
+    .amwrap-steps-wrapper {
+        & {
+            ._am-slide-down;
+
+            margin: 0 0 @amwrap__indent__l 0;
+            z-index: 1;
+        }
+
+        &:not(.-active) {
+            display: none;
+        }
+    }
+
+    .amwrap-btn-toolbar {
+        .am-flex(flex-end);
+    }
+
+    .amwrap-steps-block {
+        & {
+            .am-flex();
+
+            margin: 0;
+            padding: 0;
+        }
+
+        &,
+        .amwrap-step {
+            list-style: none;
+            width: 100%;
+        }
+
+        .amwrap-step {
+            & {
+                margin: 0;
+                max-width: 100%;
+            }
+
+            &:not(.-active) {
+                display: none;
+            }
+        }
+    }
+
+    .amwrap-slider-block {
+        & {
+            .am-flex(none, center, wrap);
+            .transition();
+
+            list-style: none;
+            padding: 0;
+        }
+
+        .amwrap-check {
+            bottom: 0;
+            box-sizing: border-box;
+            cursor: pointer;
+            display: block;
+            height: 100%;
+            left: 0;
+            margin: 0;
+            opacity: 0;
+            padding: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100%;
+            z-index: -1;
+        }
+
+        .amwrap-slide {
+            .am-flex(flex-start, flex-start, wrap);
+            .transition();
+
+            border: 1px solid transparent;
+            border-radius: 2px;
+            box-sizing: border-box;
+            cursor: pointer;
+            margin: 0;
+            max-width: 110px;
+            padding: (@amwrap__indent / 2);
+            position: relative;
+            text-align: left;
+            width: 110px;
+        }
+
+        .amwrap-slide.-active {
+            border-color: @amwrap__active__color;
+        }
+
+        .amwrap-price,
+        .amwrap-name,
+        .amwrap-description {
+            flex-basis: 100%;
+            margin: 0;
+        }
+
+        .amwrap-img {
+            width: 100px;
+        }
+
+        .amwrap-name {
+            margin: 0 0 2px 0;
+            white-space: normal;
+            word-wrap: break-word;
+        }
+
+        .amwrap-price {
+            font-weight: bold;
+            word-break: break-all;
+            word-break: break-word;
+        }
+
+        .amwrap-description {
+            display: none;
+        }
+    }
+}
+
+//
+//  Tablet +
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .amwrap-slider-block .amwrap-slide:hover {
+        border-color: @amwrap__active__color;
+    }
+}

@@ -1,0 +1,32 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */
+/** @var \Magento\Framework\View\Element\Template $block */
+use Amasty\GiftWrap\Setup\Patch\Data\CreateProductAttributes;
+
+?>
+
+<aside class="amwrap-popup-block" data-amwrap-js="popup-block" data-amwrap-popup='close' data-mage-init='
+    {
+        "amwrapCart": {
+            "wrapAvailableAttribute": "<?= /* @noEscape */ CreateProductAttributes::AVAILABLE_FOR_WRAPPING ?>",
+            "chosenItemTemplate": "<?= /* @noEscape */ $block->escapeQuote(trim(preg_replace('/\n/', '', $block->getChildHtml('chosen_template'))), true) ?>",
+            "deleteWrapUrl": "<?= $block->escapeUrl($block->getUrl('amgiftwrap/ajax_wrap/remove')) ?>"
+        },
+        "amwrapPopup": {
+             "titleTemplate": "<?= /* @noEscape */ $block->escapeQuote(trim(preg_replace('/\n/', '', $block->getChildHtml('title_template'))), true) ?>"
+        }
+    }'>
+    <div class="amwrap-popup" data-amwrap-js="popup-data">
+        <div class="amwrap-popup-toolbar">
+            <button class="amwrap-close-btn" data-amwrap-popup='close'></button>
+        </div>
+        <?= $block->getChildHtml('option_list') ?>
+        <?= $block->getChildHtml('items_list') ?>
+        <?= $block->getChildHtml('wrap_all_title') ?>
+        <?= $block->getChildHtml('popup') ?>
+    </div>
+</aside>

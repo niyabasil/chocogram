@@ -1,0 +1,33 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */
+    /** @var \Amasty\GiftWrap\Block\Product\View\Wrap $block */
+    /** @var \Amasty\GiftWrap\Model\Wrapper\Wrap $wrapper */
+    /** @var \Amasty\GiftWrap\Model\SaleData\AbstractWrap|null $selectedWrap */
+
+    $selectedWrap = $block->getSelectedWrap();
+?>
+
+<ul class="amwrap-slider-block"
+    data-amwrap-js="slide-list"
+    data-mage-init='{"amwrapSlick": {}}'>
+    <?php foreach ($block->getWrappers() as $wrapper): ?>
+        <?php $currentSelected = $selectedWrap && $selectedWrap->getAmGiftWrapWrapId() == $wrapper->getEntityId() ?>
+        <li class="amwrap-slide <?= $currentSelected ? '-active' : '' ?>" data-amwrap-js="item"
+            data-amwrap-id="<?= (int)$wrapper->getEntityId(); ?>">
+            <?php if ($src = $block->getImageSrc($wrapper->getImage())): ?>
+                <img class="amwrap-img"
+                     alt="<?= $block->escapeHtml($wrapper->getName()); ?>"
+                     src="<?= $block->escapeUrl($src); ?>"
+                     data-amwrap-js="img"/>
+            <?php endif; ?>
+            <p class="amwrap-name" data-amwrap-js="name"><?= $block->escapeHtml($wrapper->getName()); ?></p>
+            <p class="amwrap-price" data-amwrap-js="price"><?= $block->getPriceHtml($wrapper); ?></p>
+            <p class="amwrap-description" data-amwrap-js="desc"><?= $block->escapeHtml($wrapper->getDescription()); ?></p>
+            <input class="amwrap-check" data-amwrap-js="checkbox" type="radio" name="amwrap[wrap_id]" value="<?= (int)$wrapper->getEntityId(); ?>" <?= $currentSelected ? 'checked' : '' ?> />
+        </li>
+    <?php endforeach; ?>
+</ul>

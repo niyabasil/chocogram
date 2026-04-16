@@ -1,0 +1,118 @@
+//
+//  Finish Step
+//  _____________________________________
+
+//
+//  Common
+//  -------------------------------------
+
+& when (@media-common = true) {
+    .amwrap-finish-message {
+        & {
+            .am-flex(center, center);
+
+            background-color: @amwrap-info__background;
+            margin: (@amwrap__indent__xl * 2) 0 @amwrap__indent__l;
+            padding: 8px;
+        }
+
+        .amwrap-message {
+            & {
+                .am-flex(center, none);
+            }
+
+            &:before {
+                content: url('@{baseDir}Amasty_GiftWrap/icons/gift.svg');
+                display: block;
+                height: @amwrap__indent__l;
+                margin: 2px 5px 0 0;
+                min-width: @amwrap__indent__l;
+                width: @amwrap__indent__l;
+            }
+        }
+    }
+
+    .amwrap-choose-list {
+        & {
+            .am-flex(none, none, wrap);
+
+            list-style: none;
+            padding: 0 0 (@amwrap__indent__xl * 2) 0;
+        }
+
+        .amwrap-choose {
+            & {
+                .am-flex();
+
+                flex-basis: 100%;
+                margin: 0;
+                padding: @amwrap__indent__xl 0;
+            }
+
+            &:not(.-active) {
+                display: none;
+            }
+
+            &:not(:first-child) {
+                border-top: 1px solid @color-gray-light5;
+            }
+        }
+
+        .amwrap-img-block {
+            height: 50px;
+            margin-right: @amwrap__indent;
+            min-width: 50px;
+            order: 1;
+            width: 50px;
+        }
+
+        .amwrap-img {
+            height: 100%;
+            object-fit: none;
+            width: 100%;
+        }
+
+        .amwrap-name-block {
+            flex-basis: 100%;
+            margin: 0;
+            order: 2;
+            word-break: break-all;
+            word-break: break-word;
+        }
+
+        .amwrap-name {
+            display: block;
+            flex-basis: 100%;
+            font-weight: 600;
+            margin: 0 0 (@amwrap__indent / 2);
+        }
+
+        .amwrap-description {
+            color: @amwrap-description__color;
+            font-size: 11px;
+            white-space: pre-wrap;
+            word-break: break-all;
+            word-break: break-word;
+        }
+
+        .amwrap-price {
+            .am-flex(center, center);
+
+            flex-basis: 180px;
+            font-weight: 600;
+            margin: 0;
+            order: 3;
+        }
+
+        .amwrap-edit-btn {
+            & {
+                flex-basis: 50px;
+                order: 4;
+            }
+
+            &:after {
+                margin: auto;
+            }
+        }
+    }
+}

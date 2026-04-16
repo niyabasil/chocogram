@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Amasty_GiftWrap::giftwrap" 
+             title="Gift Wrap"
+             module="Amasty_GiftWrap" 
+             parent="Magento_Catalog::catalog" 
+             sortOrder="160"
+             resource="Amasty_GiftWrap::giftwrap"
+        />
+        <add id="Amasty_GiftWrap::wrap"
+             title="Gift Wraps"
+             sortOrder="10" 
+             module="Amasty_GiftWrap" 
+             parent="Amasty_GiftWrap::giftwrap"
+             action="amgiftwrap/wrap/"
+             resource="Amasty_GiftWrap::wrap"
+        />
+        <add id="Amasty_GiftWrap::message_card"
+             title="Gift Message Cards"
+             sortOrder="20" 
+             module="Amasty_GiftWrap" 
+             parent="Amasty_GiftWrap::giftwrap"
+             action="amgiftwrap/message_card/"
+             resource="Amasty_GiftWrap::message_card"
+        />
+    </menu>
+</config>

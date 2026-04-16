@@ -1,0 +1,77 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */
+
+use Amasty\GiftWrap\Api\SaleData\WrapInterface;
+
+/** @var \Amasty\GiftWrap\Block\Checkout\Cart\Wrap\ListWrap $block */
+?>
+<div data-amwrap-js="amwrap-added-list">
+    <?php if ($block->getExistingWraps()): ?>
+        <p class="amwrap-info-block">
+            <?=  $block->escapeHtml(__('Added Gift Wrap(s)')) ?>
+        </p>
+        <ul class="amwrap-wrap-list amwrap-list">
+            <?php foreach ($block->getExistingWraps() as $existingWrap): ?>
+            <li class="amwrap-item-block">
+                <ul class="amwrap-product-list amwrap-list">
+                    <?php foreach ($block->getItemsInfo($existingWrap[WrapInterface::ID]) as $itemInfo): ?>
+                        <li class="amwrap-product">
+                            <span class="amwrap-name"><?= $block->escapeHtml($block->getItemName($itemInfo['item_id'])) ?></span>
+                            <span class="amwrap-qty"><?= (int)$itemInfo['qty'] ?></span>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+                <div class="amwrap-info-list">
+                    <table>
+                        <tr class="amwrap-item">
+                            <td class="amwrap-title"><?= $block->escapeHtml(__('Gift Wrap')) ?>:</td>
+                            <td class="amwrap-name">
+                                <?= $block->escapeHtml($block->getWrapName($existingWrap[WrapInterface::WRAP_ID])) ?>
+                            </td>
+                        </tr>
+                        <?php if (!empty($existingWrap[WrapInterface::CARD_ID])): ?>
+                        <tr class="amwrap-item">
+                            <td class="amwrap-title"><?= $block->escapeHtml(__('Gift Card')) ?>:</td>
+                            <td class="amwrap-name">
+                                <?= $block->escapeHtml($block->getCardName($existingWrap[WrapInterface::CARD_ID])) ?>
+                            </td>
+                        </tr>
+                        <?php endif; ?>
+                        <?php if (!empty($existingWrap[WrapInterface::GIFT_MESSAGE])): ?>
+                        <tr class="amwrap-item">
+                            <td class="amwrap-title"><?= $block->escapeHtml(__('Gift Message')) ?>:</td>
+                            <td class="amwrap-name">
+                               <?= /** @noEsape */ nl2br($block->escapeHtml($existingWrap[WrapInterface::GIFT_MESSAGE] ?? '')) ?>
+                            </td>
+                        </tr>
+                        <?php endif; ?>
+                    </table>
+                </div>
+                <div class="amwrap-price-block">
+                    <?= $block->getPackPriceHtml((int) $existingWrap[WrapInterface::WRAP_ID], (int) $existingWrap[WrapInterface::CARD_ID]) ?>
+                </div>
+                <div class="amwrap-actions-block">
+                    <?php $id = $block->escapeHtml($existingWrap[WrapInterface::ID]) ?>
+                    <button class="amwrap-edit-btn"
+                            data-amwrap-js="edit-step"
+                            data-amwrap-popup='open'
+                            data-amwrap-loader='trigger'
+                            data-amwrap-id="<?= $block->escapeHtml($id) ?>">
+
+                    </button>
+                    <button class="amwrap-trash-btn"
+                            data-amwrap-js="remove-step"
+                            data-amwrap-loader='trigger'
+                            data-amwrap-id="<?= $block->escapeHtml($id) ?>">
+
+                    </button>
+                </div>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+</div>

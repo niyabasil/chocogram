@@ -1,0 +1,22 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */ /** @var \Amasty\GiftWrap\Block\Checkout\Cart\Wrap\Renderer $block */ ?>
+
+<div class="amwrap-items-list" data-amwrap-js="items-list">
+    <form data-amwrap-js="list-items-form" data-mage-init='{
+        "validation": {
+            "ignore": ".-unchecked"
+        }
+    }'>
+        <ul class="amwrap-items-content" data-amwrap-js="items-list-content"></ul>
+    </form>
+    <div class="amwrap-btn-toolbar" data-amwrap-js="items-list-btnwrap">
+        <button class="amwrap-btn -primary" data-amwrap-js="list-next-step">
+            <?= $block->escapeHtml(__('Next')); ?>
+            <span class="amwrap-chevron -right"></span>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */
+    /** @var \Amasty\GiftWrap\Block\Product\View $block */
+
+    $cardBlock = $block->getChildBlock('card');
+    $isMessageWithoutCard = $cardBlock->getIsAllowedMessageWithoutCard();
+?>
+
+<?php if ($block->getChildBlock('wrap') && $block->getChildBlock('wrap')->getWrappers()): ?>
+    <?= $block->getChildHtml('title'); ?>
+    <div class="amwrap-gift-wrap <?= $block->getSelectedWrap() ? '' : '-active' ?>"
+         data-amwrap-js='wrapper-block'
+         data-mage-init='{
+            "amwrap": <?= $block->escapeHtml($block->getJsonConfig(['isMessageDependency' => $isMessageWithoutCard]))?>,
+            "amwrapToolbar": {"isMessageWithoutCard": "<?= /* @noEscape */ $isMessageWithoutCard ?>"}
+    }'>
+        <?= $block->getChildHtml('messages', false) ?>
+        <?= $block->getChildBlockHtml('checker'); ?>
+        <?= $block->getChildHtml('existing_wraps'); ?>
+        <div class="amwrap-steps-wrapper <?= $block->getSelectedWrap() ? '-active' : '' ?>" data-amwrap-js="wrapper">
+            <?php if ($block->getSelectedWrap()): ?>
+                <input name="amwrap[existing_wrap_id]" type="hidden" value="<?= /** @noEscape */ $block->getSelectedWrap()->getAmGiftWrapEntityId() ?>" />
+            <?php endif; ?>
+            <?= $block->getChildBlockHtml('toolbar'); ?>
+            <ul class="amwrap-steps-block" data-amwrap-js="steps">
+                <li class="amwrap-step amwrap-gift -active" data-amwrap-js="step" data-mage-init='{"amwrapData": {"step": "0"}}'>
+                    <?= $block->getChildBlockHtml('wrap') ?>
+                    <?php if ($isMessageWithoutCard && !$cardBlock->getMessageCards()): ?>
+                        <?php
+                            $priceBlock = $block->getLayout()->getBlock('amgiftwrap.prices.checkbox');
+                            $priceBlock->setSelectedWrap($block->getSelectedWrap());
+                        ?>
+                        <?= $priceBlock->toHtml(); ?>
+                    <?php endif; ?>
+                </li>
+                <?php if (!$isMessageWithoutCard || ($isMessageWithoutCard && $cardBlock->getMessageCards())): ?>
+                    <li class="amwrap-step amwrap-card"
+                        data-amwrap-js="step"
+                        <?= /* @noEscape */ $isMessageWithoutCard ? 'data-amwrap-step="card"' : '' ?>
+                        data-mage-init='{"amwrapData": {"step": "1"}}'>
+                        <?= $block->getChildBlockHtml('card'); ?>
+                    </li>
+                <?php endif; ?>
+                <li class="amwrap-step" data-amwrap-js="step">
+                    <?= $block->getChildHtml('finish'); ?>
+                </li>
+            </ul>
+            <?= $block->getChildBlockHtml('buttons'); ?>
+        </div>
+    </div>
+<?php endif; ?>
+<?= $block->getChildBlockHtml('multishipping_selected') ?>

@@ -1,0 +1,100 @@
+//
+//  Checkout Page Styles
+//  _____________________________________
+
+//
+//  Common
+//  -------------------------------------
+
+& when (@media-common = true) {
+
+    .amwrap-checkout-product {
+        & {
+            .am-flex();
+        }
+
+        > .amwrap-image {
+            display: block;
+            margin: 0 @amwrap__indent__l;
+            min-width: 75px;
+        }
+
+        > .amwrap-item-details {
+            flex-grow: 1;
+            width: 100%;
+        }
+    }
+
+    .amwrap-item-details {
+        > .amwrap-header {
+            .am-flex(space-between, none, none);
+        }
+
+        .amwrap-name {
+            .am-word-break;
+
+            padding: 0 (@amwrap__indent / 2) 0 0;
+        }
+
+        > .amwrap-item-options {
+            margin: @amwrap__indent 0 0;
+        }
+    }
+
+    .amwrap-item-options {
+        > .amwrap-toggle {
+            & {
+                cursor: pointer;
+                display: inline-block;
+                margin: 0 0 @amwrap__indent 0;
+                padding: 0 @amwrap__indent__l 0 0;
+                position: relative;
+                user-select: none;
+            }
+
+            &:before {
+                border-color: transparent @color-black @color-black transparent;
+                border-style: solid;
+                border-width: 1px;
+                content: '';
+                display: block;
+                height: 6px;
+                position: absolute;
+                right: 0;
+                top: 4px;
+                transform: rotate(45deg);
+                width: 6px;
+            }
+        }
+
+        &.-active > .amwrap-toggle:before {
+            border-color: @color-black transparent transparent @color-black;
+            top: @amwrap__indent;
+        }
+    }
+
+    .amwrap-options-content {
+        & {
+            .am-word-break;
+
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        > .amwrap-option {
+            margin: 0 0 5px;
+        }
+
+        .amwrap-label,
+        .amwrap-value {
+            display: block;
+            font-size: 12px;
+            width: 100%;
+        }
+
+        .amwrap-label {
+            font-weight: 600;
+        }
+    }
+}

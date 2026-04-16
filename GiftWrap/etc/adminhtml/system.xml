@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="amgiftwrap" translate="label" type="text" sortOrder="70623" showInDefault="1" showInWebsite="1" showInStore="1">
+            <resource>Amasty_GiftWrap::config</resource>
+            <class>separator-top</class>
+            <label>Gift Wrap</label>
+            <tab>amasty</tab>
+
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment><![CDATA[Please enable the corresponding setting on per-product level. Click <a target="_blank" href="https://amasty.com/docs/doku.php?id=magento_2:gift-wrap">here</a> for more information.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <frontend_model>Amasty\GiftWrap\Block\Adminhtml\System\Config\Field\Enabled</frontend_model>
+                </field>
+
+                <field id="allow" translate="label comment" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow to Add Wrap on</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <source_model>Amasty\GiftWrap\Model\OptionSource\Allow</source_model>
+                    <frontend_model>Amasty\GiftWrap\Block\Adminhtml\System\Config\Field\Allow</frontend_model>
+                </field>
+
+                <field id="customer_note" translate="label comment" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Admin's Note for Customers</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <comment>Here you can greet your customers, tell them more about wrapping peculiarities, encourage to beautifully wrap their purchases, etc. The message will be shown during the whole wrapping process on the storefront.</comment>
+                </field>
+
+                <field id="allow_message_without_card" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Dependency of Gift Message on Gift Message Card</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <comment><![CDATA[If set to 'Yes', gift messages will be available for customers only after Gift Card choosing.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="gift_message_placeholder" translate="label comment" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Gift Message Placeholder</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <comment>Leave empty if placeholder is not needed.</comment>
+                </field>
+            </group>
+            <group id="tax" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Tax</label>
+                <depends>
+                    <field id="amgiftwrap/general/enabled">1</field>
+                </depends>
+
+                <field id="wrap_tax_class_id" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Wrap Tax Class Id</label>
+                    <source_model>Amasty\GiftWrap\Model\OptionSource\TaxClass</source_model>
+                </field>
+
+                <field id="card_tax_class_id" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Message Card Tax Class Id</label>
+                    <source_model>Amasty\GiftWrap\Model\OptionSource\TaxClass</source_model>
+                </field>
+
+                <field id="wrap_display_mode" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Wrap Prices</label>
+                    <comment>Will be used upon wrapping and in Added Gift Wrap(s) block.</comment>
+                    <source_model>Amasty\GiftWrap\Model\OptionSource\TaxDisplayStatus</source_model>
+                </field>
+
+                <field id="wrap_display_mode_totals" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Wrap Price in Order Total</label>
+                    <source_model>Amasty\GiftWrap\Model\OptionSource\TaxDisplayStatus</source_model>
+                </field>
+            </group>
+            <group id="email" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Email Options</label>
+                <field id="add_options_to_email" translate="label tooltip" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Add Gift Wrapping Options to Email</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

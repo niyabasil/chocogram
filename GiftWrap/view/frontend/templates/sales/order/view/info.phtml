@@ -1,0 +1,73 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */
+
+/** @var $block \Amasty\GiftWrap\Block\Sales\Order\View\Info */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<div class="order-details-items ordered">
+    <?php $order = $block->getOrder() ?>
+
+    <div class="order-title">
+        <?php $title = __('Gift Wrapping'); ?>
+        <?php if ($block->isForEmail()): ?>
+            <h3><?= $escaper->escapeHtml($title) ?></h3>
+        <?php else: ?>
+            <strong><?= $escaper->escapeHtml($title) ?></strong>
+        <?php endif; ?>
+        <?php if ($order->getTracksCollection()->count()): ?>
+            <?= $block->getChildHtml('tracking-info-link') ?>
+        <?php endif; ?>
+    </div>
+    <?php if ($block->isAllowedToDisplay()): ?>
+        <div class="table-wrapper order-items">
+            <table id="my-orders-table "
+                   class="data table table-order-items <?= $block->isForEmail() ? 'amwrap-table' : ''?>"
+                   summary="<?= $escaper->escapeHtml(__('Items Ordered')) ?>
+            ">
+                <?php if (!$block->isForEmail()): ?>
+                    <caption class="table-caption"><?= $escaper->escapeHtml(__('Items Ordered')) ?></caption>
+                <?php endif; ?>
+                <thead>
+                <tr class="headings">
+                    <?php $i = 0;
+                    $columns = $block->getColumns();
+                    $lastItemNumber = count($columns) ?>
+                    <?php foreach ($columns as $columnName => $columnTitle):?>
+                        <?php $i++; ?>
+                        <th class="col-<?= $escaper->escapeHtml($columnName) ?><?= $escaper->escapeHtml(($i === $lastItemNumber ? ' last' : '')) ?>">
+                            <?= $escaper->escapeHtml($columnTitle) ?>
+                        </th>
+                    <?php endforeach; ?>
+                </tr>
+                </thead>
+                <?php $wrapData = $block->getWrapData();?>
+                <?php $i = 0; foreach ($wrapData as $wrapItem): ?>
+                    <tbody class="<?= $escaper->escapeHtml($i++ % 2 ? 'even' : 'odd') ?>">
+                    <tr>
+                        <?php $k = 0; foreach ($columns as $columnName => $columnClass):?>
+                            <?php $i++; ?>
+                            <td class="<?= $escaper->escapeHtml('amwrap-' . $columnName) ?><?= $escaper->escapeHtml(($k === $lastItemNumber ? ' last' : '')) ?>">
+                              <?= /* @escapeNotVerified */ $block->getColumnHtml($wrapItem, $columnName) ?>
+                            </td>
+                        <?php endforeach; ?>
+                    </tr>
+                    <?php foreach ($wrapItem->getItemCollection() as $item):?>
+                        <tr>
+                            <td colspan="<?= $escaper->escapeHtml($lastItemNumber) ?>">
+                                <?= $escaper->escapeHtml($item->getName()) ?>
+                                <b><?= $escaper->escapeHtml('x' . $item->getRequestedQty()) ?></b>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                <?php endforeach; ?>
+            </table>
+        </div>
+    <?php else: ?>
+        <div class="order-items"><?= $escaper->escapeHtml(__('No Items Available')) ?></div>
+    <?php endif; ?>
+</div>

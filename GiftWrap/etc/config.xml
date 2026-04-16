@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <amgiftwrap>
+            <general>
+                <enabled>0</enabled>
+                <allow>product,cart,checkout</allow>
+                <customer_note>Item(s) will be sent packaged in a gift box. Please remember, once enclosed you will be unable to see the contents of the package.</customer_note>
+                <gift_message_placeholder>e.g. I'm truly grateful to have a friend like you! Happy Holidays!</gift_message_placeholder>
+            </general>
+            <tax>
+                <wrap_tax_class_id>0</wrap_tax_class_id>
+                <card_tax_class_id>0</card_tax_class_id>
+                <wrap_display_mode_totals>0</wrap_display_mode_totals>
+            </tax>
+            <email>
+                <add_options_to_email>0</add_options_to_email>
+            </email>
+        </amgiftwrap>
+    </default>
+</config>

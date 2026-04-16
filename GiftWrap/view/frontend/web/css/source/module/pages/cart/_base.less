@@ -1,0 +1,105 @@
+//
+//  Cart Page Styles
+//  _____________________________________
+
+//
+//  Common
+//  -------------------------------------
+
+& when (@media-common = true) {
+    .amwrap-item-option {
+        & {
+            .am-flex(space-between, center);
+
+            background: @amwrap-info__background;
+            border-radius: 2px;
+            box-sizing: border-box;
+            margin: @amwrap__indent__l 0 0 0;
+            padding: 4px @amwrap__indent;
+            width: 190px;
+        }
+
+        .amwrap-add {
+            & {
+                ._am-clear-btn;
+
+                color: @amwrap__active__color;
+                font-weight: 600;
+                opacity: .3;
+                padding: 8px;
+                pointer-events: none;
+            }
+
+            &:not(:disabled):not(.-loading).-active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+        }
+    }
+
+    .amwrap-option-list {
+        & {
+            .am-flex(center, center, wrap);
+
+            margin: @amwrap__indent 0 50% 0;
+        }
+
+        &:not(.-active) {
+            display: none;
+        }
+
+        .amwrap-popup-title {
+            border-bottom: 0;
+            margin: 0 0 70px 0;
+        }
+
+        .amwrap-option {
+            & {
+                .transition(.1);
+
+                background: @color-white;
+                border: 1px solid @amwrap-btn__active__background;
+                border-radius: 2px;
+                box-shadow: @amwrap__box-shadow;
+                box-sizing: border-box;
+                color: @amwrap-btn__active__background;
+                flex-basis: 205px;
+                font-weight: normal;
+                margin: @amwrap__indent;
+                padding: @amwrap__indent__xl @amwrap__indent;
+            }
+
+            &:hover {
+                background: @amwrap-btn__active__background;
+                color: @color-white;
+            }
+        }
+    }
+
+    .amwrap-cart-toolbar {
+        .am-flex(flex-start, center);
+
+        float: left;
+        width: 70%;
+    }
+
+    .cart-container .amwrap-gift-button {
+        box-sizing: border-box;
+        margin: 0 @amwrap__indent__l;
+    }
+}
+
+//
+//  Tablet +
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .cart-container {
+        .amwrap-gift-button {
+            float: left;
+            margin: 0;
+            padding: 0 4% 0 0;
+            width: 75%;
+        }
+    }
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_quote_product_add_after">
+        <observer name="Amasty_GiftWrap::AddWrapsToCart" instance="Amasty\GiftWrap\Observer\ProductAddAfter" />
+    </event>
+    <event name="controller_action_postdispatch_checkout_cart_delete">
+        <observer name="Amasty_GiftWrap::RemoveWrapsToCart" instance="Amasty\GiftWrap\Observer\ProductRemoveAfter" />
+    </event>
+    <event name="checkout_cart_update_items_after"> 
+        <observer name="Amasty_GiftWrap::UpdateWrapsToCart" instance="Amasty\GiftWrap\Observer\CartUpdateObserver" />
+    </event>
+</config>

@@ -1,0 +1,48 @@
+//
+//  Base Styles
+// _______________________________________________
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .amwrap-analytic {
+        .am-flex();
+
+        margin: 0 0 @amwrap__indent__xxl 0;
+    }
+
+    .amwrap-table-wrap {
+        flex-basis: 30%;
+        min-width: 350px;
+    }
+
+    .amwrap-chart-wrap {
+        flex-grow: 1;
+        padding: 0 0 0 50px;
+    }
+
+    .amwrap-title {
+        margin: 0 0 @amwrap__indent__xxl 0;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .amwrap-overview-inner {
+        width: 100%;
+        min-height: 500px;
+    }
+
+    .amwrap-gift_message {
+        word-break: break-word;
+    }
+
+    .admin__page-section {
+        .am-gift-order-gift-wrapping {
+            .admin__legend {
+                margin-bottom: 1rem;
+            }
+        }
+    }
+}

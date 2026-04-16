@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/pdf_file.xsd">
+    <totals>
+        <total name="gift_wrap">
+            <title translate="true">Gift Wrap</title>
+            <source_field>am_gift_wrap_total_price</source_field>
+            <font_size>7</font_size>
+            <display_zero>true</display_zero>
+            <model>Amasty\GiftWrap\Model\Total\Order\Pdf\GiftWrap</model>
+            <sort_order>290</sort_order>
+        </total>
+    </totals>
+</config>

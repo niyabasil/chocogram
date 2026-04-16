@@ -1,0 +1,24 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */
+    /** @var Amasty\GiftWrap\Block\Product\View\Card $block */
+    /** @var \Amasty\GiftWrap\Model\SaleData\AbstractWrap|null $selectedWrap */
+
+    $selectedWrap = $block->getSelectedWrap();
+    $steps = 3;
+    if ($block->getIsAllowedMessageWithoutCard() && !$block->getMessageCards()) {
+        $steps = 2;
+    }
+?>
+
+<div class="amwrap-toolbar-block" data-amwrap-js="toolbar-block">
+    <h3 class="amwrap-title"><?= $block->escapeHtml($selectedWrap ? $selectedWrap->getAmGiftWrapWrapName() : __('Choose the Gift Wrap')) ?></h3>
+    <ul class="amwrap-pagination-block" data-amwrap-js="toolbar-pager">
+        <?php for ($i = 0; $i < $steps; $i++): ?>
+            <li class="amwrap-page <?= /** @noEscape */  $i === 0 ? '-active' : '' ?>"></li>
+        <?php endfor; ?>
+    </ul>
+</div>

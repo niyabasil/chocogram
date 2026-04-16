@@ -1,0 +1,55 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */
+
+/** @var $block \Amasty\GiftWrap\Block\Adminhtml\Sales\Order\View\Info */
+?>
+<?php if ($block->isAllowedToDisplay()): ?>
+<div id="am-gift-wrap-order-container" class="am-gift-order-gift-wrapping">
+    <legend class="admin__legend">
+        <?= $block->escapeHtml(__('Gift Wrapping')) ?>
+    </legend>
+
+    <div class="admin__table-wrapper">
+        <table class="data-table admin__table-primary edit-order-table">
+            <thead>
+            <tr class="headings">
+                <?php $i = 0;
+                $columns = $block->getColumns();
+                $lastItemNumber = count($columns) ?>
+                <?php foreach ($columns as $columnName => $columnTitle):?>
+                    <?php $i++; ?>
+                    <th class="col-<?= $block->escapeHtml($columnName) ?><?= $block->escapeHtml(($i === $lastItemNumber ? ' last' : '')) ?>">
+                        <?= /* @noEscape */ $columnTitle ?>
+                    </th>
+                <?php endforeach; ?>
+            </tr>
+            </thead>
+            <?php $wrapData = $block->getWrapData();?>
+            <?php $i = 0; foreach ($wrapData as $wrapItem): ?>
+                <tbody class="<?= $block->escapeHtml($i++ % 2 ? 'even' : 'odd') ?>">
+                <tr>
+                <?php $k = 0; foreach ($columns as $columnName => $columnClass):?>
+                    <?php $i++; ?>
+                    <td class="<?= $block->escapeHtml('amwrap-' . $columnName) ?><?= $block->escapeHtml(($k === $lastItemNumber ? ' last' : '')) ?>">
+                      <?= /* @escapeNotVerified */ $block->getColumnHtml($wrapItem, $columnName) ?>
+                    </td>
+                <?php endforeach; ?>
+                </tr>
+                <?php foreach ($wrapItem->getItemCollection() as $item):?>
+                    <tr>
+                        <td colspan="<?= $block->escapeHtml($lastItemNumber) ?>">
+                            <?= $block->escapeHtml($item->getName()) ?>
+                            <b><?= $block->escapeHtml('x' . $item->getRequestedQty()) ?></b>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</div>
+<?php endif; ?>

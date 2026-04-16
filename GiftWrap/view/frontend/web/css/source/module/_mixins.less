@@ -1,0 +1,62 @@
+//
+//  Mixins
+//  _____________________________________
+
+.am-mage-icon(@ico: none) {
+    display: inline-block;
+    font-family: @icons__font-name;
+    content: @ico;
+}
+
+.transition(@del: .1) {
+    transition: ~'@{del}s all ease-in';
+}
+
+.am-flex(
+    @horiz-pos: none,
+    @vert-pos: none,
+    @wrap: none
+) {
+    & {
+        display: flex;
+    }
+
+    & when not (@horiz-pos = none) {
+        justify-content: @horiz-pos;
+    }
+
+    & when not (@vert-pos = none) {
+        align-items: @vert-pos;
+    }
+
+    & when not (@wrap = none) {
+        flex-wrap: @wrap;
+    }
+}
+
+.am-order(@max-index: none, @index: 0) when (@index =< @max-index) {
+    .am-order(@max-index; (@index + 1));
+    ._order-@{index} {
+        order: @index;
+    }
+}
+
+.am-scrollbar(
+    @width: 5,
+    @color_main: #c5c5c5,
+    @color_hover: #808080,
+    @border-radius: 3
+) {
+    ::-webkit-scrollbar {
+        width: ~'@{width}px';
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: ~'@{border-radius}px';
+        background: @color_main;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: @color_hover;
+    }
+}

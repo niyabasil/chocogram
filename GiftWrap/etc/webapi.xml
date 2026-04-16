@@ -1,0 +1,63 @@
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/amasty_giftWrap/wrap" method="POST">
+        <service class="Amasty\GiftWrap\Api\WrapRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_GiftWrap::wrap" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_giftWrap/wrap/:entityId" method="PUT">
+        <service class="Amasty\GiftWrap\Api\WrapRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_GiftWrap::wrap" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_giftWrap/wrap/:entityId" method="DELETE">
+        <service class="Amasty\GiftWrap\Api\WrapRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Amasty_GiftWrap::wrap" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_giftWrap/wrap" method="GET">
+        <service class="Amasty\GiftWrap\Api\WrapRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_GiftWrap::wrap" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_giftWrap/wrap/all" method="GET">
+        <service class="Amasty\GiftWrap\Api\WrapRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="Amasty_GiftWrap::wrap" />
+        </resources>
+    </route>
+
+    <route url="/V1/amasty_giftWrap/message_card" method="POST">
+        <service class="Amasty\GiftWrap\Api\MessageCardRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_GiftWrap::message_card" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_giftWrap/message_card/:entityId" method="PUT">
+        <service class="Amasty\GiftWrap\Api\MessageCardRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Amasty_GiftWrap::message_card" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_giftWrap/message_card/:entityId" method="DELETE">
+        <service class="Amasty\GiftWrap\Api\MessageCardRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Amasty_GiftWrap::message_card" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_giftWrap/message_card" method="GET">
+        <service class="Amasty\GiftWrap\Api\MessageCardRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Amasty_GiftWrap::message_card" />
+        </resources>
+    </route>
+    <route url="/V1/amasty_giftWrap/message_card/all" method="GET">
+        <service class="Amasty\GiftWrap\Api\MessageCardRepositoryInterface" method="getList" />
+        <resources>
+            <resource ref="Amasty_GiftWrap::message_card" />
+        </resources>
+    </route>
+</routes>

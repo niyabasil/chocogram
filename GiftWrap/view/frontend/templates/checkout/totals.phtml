@@ -1,0 +1,16 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */ /** @var \Amasty\GiftWrap\Block\Checkout\Totals $block */ ?>
+<?php foreach ($block->getValues() as $label => $value):?>
+    <tr class="totals am-gift-wrap">
+        <th class="mark" colspan="<?= (int)$block->getColspan() ?>" scope="row">
+            <?= $block->escapeHtml($label) ?>
+        </th>
+        <td class="amount" data-th="<?= $block->escapeHtml($label) ?>">
+            <?= /** @noEscape */ $block->formatPrice($value) ?>
+        </td>
+    </tr>
+<?php endforeach; ?>

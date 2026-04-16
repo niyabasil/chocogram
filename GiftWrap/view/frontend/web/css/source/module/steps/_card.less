@@ -1,0 +1,38 @@
+//
+//  Base Step Styles
+//  _____________________________________
+
+//
+//  Common
+//  -------------------------------------
+
+& when (@media-common = true) {
+    .amwrap-step.amwrap-card {
+        & {
+            .am-flex();
+
+            flex-direction: column;
+            padding: 0 0 (@amwrap__indent__xl * 2);
+        }
+
+        .amwrap-slider-block {
+            margin: @amwrap__indent__xl 0 0;
+        }
+
+        .amwrap-card-title {
+            font-size: 14px;
+            font-weight: normal;
+            margin: 35px 0 0 0;
+        }
+
+        .amwrap-checkbox-block {
+            align-self: flex-start;
+            margin-top: (@amwrap__indent__l * 2);
+        }
+
+        .amwrap-step.amwrap-card .amwrap-img {
+            height: 66px;
+            object-fit: cover;
+        }
+    }
+}

@@ -1,0 +1,44 @@
+//
+//  Slider
+//  _____________________________________
+
+//
+//  Common
+//  -------------------------------------
+
+& when (@media-common = true) {
+    .amwrap-gift-wrap {
+        .slick-slide {
+            display: inline-block;
+            box-sizing: border-box;
+            margin: 0 3px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .slick-slider {
+            padding: 0 18px;
+        }
+
+        .slick-track {
+            .am-flex();
+        }
+
+        .slick-arrow {
+            & {
+                .transition();
+            }
+
+            &:hover {
+                filter: brightness(.5);
+            }
+        }
+    }
+
+    .amwrap-popup-block .amwrap-gift-wrap.-active {
+        .am-flex(none, none, wrap);
+
+        flex-direction: column;
+        flex-grow: 1;
+    }
+}

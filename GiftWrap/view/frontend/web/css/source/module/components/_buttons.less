@@ -1,0 +1,254 @@
+//
+//  Buttons
+//  _____________________________________
+
+//
+//  Colors
+//  -------------------------------------
+
+@amwrap-btn__color: #4190c6;
+@amwrap-btn__active__background: #026bb3;
+
+//
+//  Helpers
+//  -------------------------------------
+
+._amwrap-fill-btn {
+    & {
+        border-color: @amwrap__active__color;
+        background: @amwrap__active__color;
+        box-shadow: none;
+        color: #fff;
+    }
+
+    &:hover {
+        background: darken(@amwrap__active__color, 5%);
+    }
+}
+
+._amwrap-btn {
+    & {
+        .am-flex(center, center);
+
+        box-sizing: border-box;
+        padding: 6px @amwrap__indent__xl;
+        border: 1px solid @amwrap-btn__color;
+        border-radius: 2px;
+        color: @amwrap-btn__color;
+    }
+
+    &.-active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    &.-hidden {
+        display: none;
+    }
+
+    &:disabled {
+        opacity: .3;
+        pointer-events: none;
+    }
+}
+
+//
+//  Common
+//  -------------------------------------
+
+& when (@media-common = true) {
+    .amwrap-close-btn {
+        & {
+            ._am-clear-btn;
+
+            padding: @amwrap__indent__l;
+        }
+
+        &:hover:after {
+            filter: invert(19%) sepia(98%) saturate(2559%) hue-rotate(190deg) brightness(101%) contrast(98%);
+        }
+
+        &:after {
+            display: block;
+            width: 10px;
+            content: url('../Amasty_GiftWrap/icons/close.svg');
+        }
+    }
+
+    .amwrap-edit-btn {
+        &:hover:after {
+            filter: invert(19%) sepia(98%) saturate(2559%) hue-rotate(190deg) brightness(101%) contrast(98%);
+        }
+
+        &:after {
+            width: 15px;
+            height: 15px;
+            content: url('../Amasty_GiftWrap/icons/edit.svg');
+        }
+    }
+
+    .amwrap-trash-btn {
+        &:hover:after {
+            filter: invert(19%) sepia(98%) saturate(2559%) hue-rotate(190deg) brightness(101%) contrast(98%);
+        }
+
+        &:after {
+            width: 14px;
+            content: url('../Amasty_GiftWrap/icons/trash.svg');
+        }
+    }
+
+    .amwrap-trash-btn,
+    .amwrap-edit-btn {
+        & {
+            .transition(.1);
+            ._am-clear-btn;
+        }
+
+        &:hover:after {
+            color: @amwrap__active__color;
+        }
+
+        &:after {
+            display: block;
+            color: #9b9b9c;
+        }
+    }
+
+    .amwrap-chevron {
+        & {
+            .transition();
+
+            position: relative;
+        }
+
+        &:after,
+        &:before {
+            .transition();
+
+            display: block;
+            width: 6px;
+            height: 1px;
+            background: @amwrap-btn__active__background;
+            content: '';
+        }
+
+        &:after {
+            transform: rotate(-45deg) translate(-2px, 1px);
+        }
+
+        &:before {
+            transform: rotate(45deg) translate(-1px, 0px);
+        }
+
+        &.-right {
+            margin: 0 0 0 @amwrap__indent;
+        }
+    }
+
+    .amwrap-btn {
+        & {
+            .am-flex(center, center);
+            .transition(.1);
+
+            position: relative;
+            min-width: 85px;
+            border: none;
+            background: transparent;
+            box-shadow: none;
+            color: @amwrap-btn__color;
+            font-weight: normal;
+            font-style: normal;
+            opacity: .3;
+            cursor: pointer;
+            pointer-events: none;
+        }
+
+        &:hover,
+        &:active,
+        &:focus {
+            border: none;
+            background: none;
+            box-shadow: none;
+        }
+
+        &.-active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+    }
+
+    .amwrap-btn.-empty {
+        & {
+            box-shadow: none;
+            color: #98afc1;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        &:hover {
+            color: @amwrap-btn__active__background;
+        }
+
+        &.-hidden {
+            display: none;
+        }
+    }
+
+    .amwrap-btn.-primary {
+        & {
+            ._amwrap-btn;
+        }
+
+        &:active {
+            & {
+                ._amwrap-fill-btn;
+            }
+
+            .amwrap-chevron {
+                transform: translateX(5px);
+            }
+
+            .amwrap-chevron:after,
+            .amwrap-chevron:before {
+                background-color: #fff;
+            }
+        }
+
+        &.-active {
+            border: 1px solid @amwrap-btn__color;
+        }
+    }
+
+    .amwrap-btn.-fill {
+        ._amwrap-btn;
+        ._amwrap-fill-btn;
+    }
+
+    .amwrap-gift-button {
+        > .amwrap-btn {
+            height: 35px;
+        }
+    }
+}
+
+//
+//  Tablet +
+//  --------------------------------------------
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .amwrap-btn.-primary:hover {
+        & {
+            ._amwrap-fill-btn;
+        }
+
+        .amwrap-chevron {
+            transform: translateX(5px);
+        }
+
+        .amwrap-chevron:after,
+        .amwrap-chevron:before {
+            background-color: #fff;
+        }
+    }
+}

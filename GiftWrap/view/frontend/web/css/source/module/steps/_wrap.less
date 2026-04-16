@@ -1,0 +1,29 @@
+//
+//  Base Step Styles
+//  _____________________________________
+
+//
+//  Common
+//  -------------------------------------
+
+& when (@media-common = true) {
+    .amwrap-step.amwrap-gift {
+        & {
+            padding: 0 0 @amwrap__indent__xl;
+        }
+
+        .amwrap-slider-block {
+            margin: (@amwrap__indent__xl * 2) 0 0;
+        }
+
+        .amwrap-img {
+            height: 100px;
+
+            object-fit: contain;
+        }
+
+        .amwrap-checkbox-block {
+            margin-top: (@amwrap__indent__l * 2);
+        }
+    }
+}

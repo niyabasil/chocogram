@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */-->
+
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_layout.xsd">
+    <body>
+        <block class="Magento\Framework\View\Element\Template" name="amgiftwrap.price" template="Amasty_GiftWrap::salable/view/price.phtml">
+            <arguments>
+                <argument name="priceOutput" xsi:type="object">Amasty\GiftWrap\ViewModel\PriceOutput</argument>
+            </arguments>
+        </block>
+    </body>
+</layout>

@@ -1,0 +1,75 @@
+//
+//  Messages
+//  _____________________________________
+
+//
+//  Common
+//  -------------------------------------
+
+& when (@media-common = true) {
+    .amwrap-message {
+        &.-error-message {
+            .lib-message(error);
+
+            margin: 0 0 @amwrap__indent__xxl 0;
+        }
+
+        &.-success-message {
+            .lib-message(success);
+
+            margin: 0 0 @amwrap__indent__xxl 0;
+        }
+
+        &.-warning-message {
+            .lib-message(warning);
+
+            margin: 0 0 @amwrap__indent__xxl 0;
+        }
+
+        &.-top {
+            margin: 30px 0 10px;
+        }
+    }
+
+    // Override Magento styles
+    .amwrap-popup {
+        .mage-error[generated] {
+            & {
+                .lib-message(error);
+
+                position: absolute;
+                top: 100%;
+                right: 0;
+                z-index: 1;
+                box-sizing: border-box;
+                margin: 7px 0 0;
+                padding: 5px;
+                min-width: 200px;
+                border: 1px solid #ffbdbc;
+                box-shadow: @amwrap__box-shadow;
+                white-space: normal;
+            }
+
+            &:before {
+                position: absolute;
+                right: 5px;
+                bottom: 100%;
+                display: block;
+                border: 5px solid;
+                border-color: transparent #ff9b9a transparent transparent;
+                content: '';
+                transform: rotate(90deg);
+            }
+        }
+    }
+
+    .amwrap-popup .amwrap-items-list {
+        input.mage-error,
+        select.mage-error,
+        textarea.mage-error {
+            border-color: #e02b27;
+        }
+    }
+
+    // END Override Magento styles
+}

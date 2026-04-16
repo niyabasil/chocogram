@@ -1,0 +1,25 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */
+    /** @var \Magento\Framework\View\Element\Template $block */
+    /** @var \Amasty\GiftWrap\Model\SaleData\AbstractWrap|null $selectedWrap */
+
+    $selectedWrap = $block->getSelectedWrap();
+?>
+
+<div class="amwrap-selected-items <?= $selectedWrap ? '-active' : '' ?>" data-mage-init='{ "amwrapSelectedProd": {}}' >
+    <p class="amwrap-title">
+        <span>
+            <?= $block->escapeHtml(__('Gift Wrap')) ?>
+        </span>
+        <b class="amwrap-name" data-amwrap-js="selected-name"><?= $block->escapeHtml($selectedWrap ? $selectedWrap->getAmGiftWrapWrapName() : '') ?></b>
+        <span>
+            <?= $block->escapeHtml(__(('added'))) ?>
+        </span>
+    </p>
+    <button class="amwrap-edit-btn" data-amwrap-js="edit-step"></button>
+    <button class="amwrap-trash-btn" data-amwrap-js="remove-step"></button>
+</div>

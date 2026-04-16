@@ -1,0 +1,41 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */
+    /** @var \Magento\Framework\View\Element\Template $block */
+    /** @var \Magento\Framework\Escaper $escaper */
+?>
+<?php
+    /** @var \Amasty\GiftWrap\ViewModel\PriceOutput $priceOutput */
+    $priceOutput = $block->getData('priceOutput');
+    /** @var \Amasty\GiftWrap\Model\Price\SalableInterface[] $salableItems */
+    $salableItems = $block->getData(\Amasty\GiftWrap\Model\Price\Renderer::SALABLE_ITEMS_KEY);
+?>
+
+<?php $priceExclTax = $priceOutput->getPrice($salableItems) ?>
+<?php if ($priceExclTax): ?>
+    <span class="amwrap-price-container price-container">
+        <?php if ($priceOutput->isIncludingTaxShow()): ?>
+            <span class="price-wrapper price-including-tax"
+                  data-label="<?= $escaper->escapeHtmlAttr(__('Incl. Tax')) ?>">
+                <span class="price">
+                    <?php $priceInclTax = $priceOutput->getPrice($salableItems, true) ?>
+                    <?= $escaper->escapeHtml($priceOutput->convertPrice($priceInclTax)) ?>
+                </span>
+            </span>
+        <?php endif; ?>
+
+        <?php if ($priceOutput->isExcludingTaxShow()): ?>
+            <span class="price-wrapper price-excluding-tax"
+                  data-label="<?= $escaper->escapeHtmlAttr(__('Excl. Tax')) ?>">
+                <span class="price">
+                    <?= $escaper->escapeHtml($priceOutput->convertPrice($priceExclTax)) ?>
+                </span>
+            </span>
+        <?php endif; ?>
+    </span>
+<?php else: ?>
+    <?= $escaper->escapeHtml(__('Free')) ?>
+<?php endif; ?>

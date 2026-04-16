@@ -1,0 +1,10 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */ /** @var \Amasty\GiftWrap\Block\Product\View\Messages $block */ ?>
+
+<?php foreach ($block->getErrors() as $error): ?>
+    <div class="amwrap-message -warning-message"><?= $block->escapeHtml($error) ?></div>
+<?php endforeach; ?>

@@ -1,0 +1,17 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */ /** @var \Amasty\GiftWrap\Block\Checkout\Cart\Wrap\Renderer $block */ ?>
+<div class="amwrap-option-list" data-amwrap-js="option-list">
+    <div class="amwrap-popup-title">
+        <?= $block->escapeHtml(__('Gift Wrap Option')) ?>
+    </div>
+    <button class="amwrap-option" data-amwrap-js="wrap-all">
+        <?= $block->escapeHtml(__('Wrap All Available Items')) ?>
+    </button>
+    <button class="amwrap-option" data-amwrap-js="wrap-target">
+        <?= $block->escapeHtml(__('Choose Items for Wrapping')) ?>
+    </button>
+</div>

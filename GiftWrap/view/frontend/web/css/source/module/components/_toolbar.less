@@ -1,0 +1,160 @@
+//
+//  Toolbar
+//  _____________________________________
+
+//
+//  Common
+//  -------------------------------------
+
+& when (@media-common = true) {
+    .amwrap-pagination-block {
+        & {
+            .am-flex(space-between, center);
+            .transition(.1);
+
+            background: @amwrap-line__color;
+            counter-reset: page-number;
+            height: 1px;
+            list-style: none;
+            margin: 0;
+            max-width: 155px;
+            padding: 0;
+            position: relative;
+        }
+
+        &:after {
+            .transition(.5);
+
+            background: @amwrap__active__color;
+            content: '';
+            display: block;
+            height: 1px;
+            position: absolute;
+            width: 0;
+        }
+
+        &.-step-1:after {
+            width: 50%;
+        }
+
+        &.-step-2:after {
+            width: 100%;
+        }
+
+        .amwrap-page {
+            & {
+                .am-flex(center, center);
+                .transition(.3);
+
+                background: @amwrap-line__color;
+                border-radius: 50%;
+                color: @color-white;
+                height: @amwrap__indent__l;
+                margin: 0;
+                position: relative;
+                width: @amwrap__indent__l;
+                z-index: 1;
+            }
+
+            &:before {
+                .transition();
+
+                content: counter(page-number);
+                counter-increment: page-number;
+                font-size: 0;
+            }
+
+            &:after {
+                .transition();
+
+                background: @amwrap__active__color;
+                content: '';
+                height: 1px;
+                left: 100%;
+                position: absolute;
+                top: 49%;
+                width: 0;
+            }
+
+            &:not(:last-child) {
+                margin-right: (@amwrap__indent__xxl * 2);
+            }
+        }
+
+        .amwrap-page.-active {
+            & {
+                background: @amwrap__active__color;
+                height: @amwrap__indent__xxl;
+                width: @amwrap__indent__xxl;
+            }
+
+            &:before {
+                font-size: inherit;
+            }
+        }
+
+        .amwrap-page.-checked {
+            & {
+                background: @amwrap__active__color;
+                position: relative;
+            }
+
+            &:after {
+                width: 60px;
+            }
+
+            &:before {
+                ._am-check-ico;
+
+                height: 4px;
+                width: 2px;
+            }
+        }
+    }
+
+    .amwrap-toolbar-block {
+        & {
+            .am-flex(space-between, center);
+        }
+
+        .amwrap-title {
+            .am-word-break;
+
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0;
+            max-width: 55%;
+            white-space: normal;
+        }
+    }
+
+    .-edit-wrap .amwrap-toolbar-block {
+        & {
+            justify-content: flex-end;
+        }
+
+        .amwrap-title {
+            display: none;
+        }
+    }
+
+    .amwrap-popup-block {
+        .amwrap-steps-wrapper {
+            .am-flex(none, none, wrap);
+
+            flex-direction: column;
+            flex-grow: 1;
+            margin: 0;
+            width: 100%;
+        }
+
+        .amwrap-btn-toolbar {
+            align-items: flex-end;
+            flex-grow: 1;
+        }
+
+        .amwrap-items-list .amwrap-btn-toolbar {
+            margin: 0;
+        }
+    }
+}

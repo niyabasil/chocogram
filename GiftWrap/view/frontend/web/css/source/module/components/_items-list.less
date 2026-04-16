@@ -1,0 +1,132 @@
+//
+//  List of products Styles
+//  _____________________________________
+
+//
+//  Common
+//  -------------------------------------
+
+& when (@media-common = true) {
+    .amwrap-items-list {
+        & {
+            .am-flex();
+
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        &:not(.-active) {
+            display: none;
+        }
+
+        .amwrap-btn {
+            .transition(.1);
+
+            align-self: flex-end;
+        }
+
+        .amwrap-btn-toolbar {
+            & {
+                flex-grow: 1;
+                margin: 0 0 @amwrap__indent 0;
+            }
+
+            &:not(.-active) {
+                display: none;
+            }
+        }
+    }
+
+    .amwrap-items-content {
+        overflow-y: auto;
+        margin: 0 -@amwrap__indent__l;
+        padding: 0 @amwrap__indent__l;
+        max-height: 430px;
+    }
+
+    .amwrap-list-item {
+        & {
+            .am-flex(none, none);
+
+            margin: 0 0 @amwrap__indent__xl 0;
+            padding: @amwrap__indent__l;
+            border-radius: 2px;
+            box-shadow: @amwrap__box-shadow;
+            list-style-type: none;
+        }
+
+        .amwrap-checkbox-block {
+            & {
+                align-self: center;
+            }
+
+            &.-trash-btn {
+                align-self: flex-end;
+            }
+        }
+
+        .amwrap-label {
+            & {
+                margin: 0 5px 0 0;
+                font-weight: bold;
+                font-size: 12px;
+            }
+
+            &:after {
+                content: ':';
+            }
+        }
+
+        .amwrap-img {
+            .am-flex(center, center);
+
+            align-self: center;
+            margin: 0 @amwrap__indent__l;
+            width: 90px;
+            height: 90px;
+            border: 1px solid #f2f2f2;
+        }
+
+        .amwrap-qty {
+            .am-flex(none, center);
+
+            position: relative;
+            align-self: flex-start;
+            margin: @amwrap__indent @amwrap__indent__xxl @amwrap__indent @amwrap__indent;
+        }
+
+        .amwrap-qty .amwrap-input {
+            & {
+                .am-flex(center, center);
+
+                box-sizing: border-box;
+                padding: 0 5px;
+                width: 40px;
+                height: 30px;
+                border: 1px solid #ccc;
+                text-align: center;
+                font-size: 13px;
+            }
+
+            &:not(.-active) {
+                opacity: .3;
+                pointer-events: none;
+            }
+        }
+
+        .amwrap-qty .amwrap-label {
+            font-size: 14px;
+        }
+
+        .amwrap-content {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .amwrap-name {
+            margin: 0 0 @amwrap__indent__l 0;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    }
+}

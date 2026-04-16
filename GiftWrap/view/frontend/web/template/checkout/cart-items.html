@@ -1,0 +1,36 @@
+<!-- ko if: itemsCount() > 0 -->
+<div class="block items-in-cart"
+     data-bind="mageInit: {'collapsible':{'openedState': 'active', 'active': isItemsBlockExpanded()}}">
+    <div class="title" data-role="title">
+        <strong role="heading" aria-level="1">
+            <translate args="maxCartItemsToDisplay" if="maxCartItemsToDisplay < itemsCount()"></translate>
+            <translate args="'of'" if="maxCartItemsToDisplay < itemsCount()"></translate>
+            <span data-bind="text: itemsCount()"></span>
+            <translate args="'Wrapping in Cart'" if="itemsCount() === 1"></translate>
+            <translate args="'Wrappings in Cart'" if="itemsCount() > 1"></translate>
+        </strong>
+    </div>
+    <div class="content minicart-items" data-role="content">
+        <div class="minicart-items-wrapper overflowed">
+            <ol class="minicart-items">
+                <each args="getItems()">
+                    <li class="product-item">
+                        <div class="amwrap-checkout-product">
+                            <each args="$parent.elems()" render=""></each>
+                        </div>
+                    </li>
+                </each>
+            </ol>
+        </div>
+    </div>
+    <div class="actions-toolbar" if="maxCartItemsToDisplay < itemsCount()">
+        <div class="secondary">
+            <a class="action viewcart" data-bind="
+                attr: {href: cartUrl},
+                attr: {title: 'View and Edit Cart'},
+                i18n: 'View and Edit Cart'
+            "></a>
+        </div>
+    </div>
+</div>
+<!-- /ko -->

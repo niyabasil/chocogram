@@ -1,0 +1,83 @@
+//
+//  Buttons
+//  _____________________________________
+
+//
+//  Colors
+//  -------------------------------------
+
+@amwrap-checker__active__color: #1979c3;
+
+//
+//  Common
+//  -------------------------------------
+
+& when (@media-common = true) {
+    .amwrap-checkbox-block {
+        & {
+            .am-flex(none, center);
+
+            cursor: pointer;
+        }
+
+        .amwrap-text {
+            padding: 1px 0 0 @amwrap__indent;
+            color: #333;
+            word-wrap: break-word;
+            font-style: normal;
+
+            overflow-wrap: break-word;
+        }
+
+        .amwrap-input {
+            & {
+                display: none;
+            }
+
+            &:checked ~ .amwrap-mark {
+                border-color: @amwrap-checker__active__color;
+                background-color: @amwrap-checker__active__color;
+            }
+
+            &:checked ~ .amwrap-mark:after {
+                display: block;
+            }
+        }
+
+        .amwrap-mark {
+            & {
+                .am-flex(center, center);
+                .transition(.1);
+
+                position: relative;
+                box-sizing: border-box;
+                width: @amwrap__indent__l;
+                height: @amwrap__indent__l;
+                border: 1px solid @amwrap-line__color;
+                border-radius: 1px;
+                background-color: #fff;
+                cursor: pointer;
+            }
+
+            &:hover {
+                border-color: @amwrap-checker__active__color;
+            }
+
+            &:after {
+                ._am-check-ico;
+
+                display: none;
+                width: 4px;
+                height: 6px;
+            }
+        }
+
+        &:focus {
+            .amwrap-mark {
+                border-color: @amwrap-checker__active__color;
+                background-color: @amwrap-checker__active__color;
+                box-shadow: 0 2px 4px rgba(63, 156, 215, .4);
+            }
+        }
+    }
+}

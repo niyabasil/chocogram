@@ -1,0 +1,30 @@
+<div class="amwrap-image">
+    <img data-bind="attr: {'src': getSrc($parent), 'alt': getAlt($parent), 'title': getAlt($parent) }"/>
+</div>
+<div class="amwrap-item-details">
+    <div class="amwrap-header">
+        <span class="amwrap-name" data-bind="html: $parent.name"></span>
+        <span class="amwrap-subtotal" data-bind="text: getPrice($parent)"></span>
+    </div>
+    <div class="amwrap-item-options" data-bind="mageInit: {'collapsible':{'openedState': '-active'}}">
+        <span data-role="title" class="amwrap-toggle" data-bind="i18n: 'View Details'"></span>
+        <ul data-role="content" class="amwrap-options-content">
+            <!-- ko if: ($parent.message.length > 0)-->
+            <li class="amwrap-option">
+                <span class="amwrap-label" data-bind="i18n: 'Gift Message'"></span>
+                <span class="amwrap-value" data-bind="text: $parent.message"></span>
+            </li>
+            <!-- /ko -->
+            <!-- ko if: ($parent.card.length > 0)-->
+            <li class="amwrap-option">
+                <span class="amwrap-label" data-bind="i18n: 'Gift Card'"></span>
+                <span class="amwrap-value" data-bind="text: $parent.card"></span>
+            </li>
+            <!-- /ko -->
+            <li class="amwrap-option">
+                <span class="amwrap-label" data-bind="i18n: 'Products'"></span>
+                <span class="amwrap-value" data-bind="html: $parent.products"></span>
+            </li>
+        </ul>
+    </div>
+</div>

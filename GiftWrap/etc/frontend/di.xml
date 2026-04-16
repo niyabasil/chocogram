@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="am_gift_wrap_config_provider" xsi:type="object">Amasty\GiftWrap\Model\ConfigProvider\Checkout</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Checkout\Model\Cart\RequestInfoFilter">
+        <arguments>
+            <argument name="filterList" xsi:type="array">
+                <item name="amwrap" xsi:type="string">amwrap</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\Checkout\Model\Gift\Messages">
+        <plugin name="Amasty_GiftWrap::disableCheckoutMessages"
+                type="Amasty\GiftWrap\Plugin\Checkout\Model\Gift\MessagesPlugin" />
+    </type>
+
+    <type name="Magento\Checkout\Controller\Cart\Index">
+        <plugin name="multishipping_disabler" type="Amasty\GiftWrap\Plugin\Checkout\Controller\Cart\IndexPlugin" sortOrder="50" />
+    </type>
+
+    <type name="Amasty\GiftWrap\Model\Price\SalableFactory">
+        <arguments>
+            <argument name="retrievers" xsi:type="array">
+                <item name="Amasty\GiftWrap\Model\Wrapper\Wrap" xsi:type="object">Amasty\GiftWrap\Model\Price\Salable\WrapDataRetriever</item>
+                <item name="Amasty\GiftWrap\Model\MessageCard\MessageCard" xsi:type="object">Amasty\GiftWrap\Model\Price\Salable\CardDataRetriever</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="promoItemRegistryGiftWrap" type="Amasty\GiftWrap\Model\Di\Wrapper">
+        <arguments>
+            <argument name="name" xsi:type="string">Amasty\Promo\Model\ItemRegistry\PromoItemRegistry</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Amasty\GiftWrap\Observer\ProductAddAfter">
+        <arguments>
+            <argument name="promoItemRegistryGiftWrap" xsi:type="object">promoItemRegistryGiftWrap</argument>
+        </arguments>
+    </type>
+</config>

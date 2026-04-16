@@ -1,0 +1,17 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */
+/** @var \Amasty\GiftWrap\Block\Checkout\Cart\WrapTitle $block */
+?>
+
+<div class="amwrap-popup-title" data-amwrap-js="generated-title">
+    <p class="amwrap-title"><%- data.title %></p>
+    <% if (data.description || data.description === "") { %>
+    <p class="amwrap-description"><%- data.description %></p>
+    <% } else { %>
+    <p class="amwrap-description"><?= $block->getCustomerNoteHtml() ?></p>
+    <% } %>
+</div>

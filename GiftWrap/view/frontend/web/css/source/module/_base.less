@@ -1,0 +1,60 @@
+//
+//  Base Styles
+//  _____________________________________
+
+//
+//  Common
+//  -------------------------------------
+
+& when (@media-common = true) {
+    .amwrap-gift-wrap {
+        &:not(.-active) {
+            display: none;
+        }
+    }
+
+    .amwrap-list {
+        padding: 0;
+        list-style: none;
+    }
+
+    .-amwrap-disabled,
+    .-loading {
+        opacity: .3;
+        pointer-events: none;
+    }
+
+    .amwrap-gift_message {
+        word-break: break-word;
+    }
+
+    .amwrap-price-container .price-including-tax + .price-excluding-tax:before {
+        font-weight: 400;
+    }
+
+    //
+    //  Amasty Checkout Compatibility
+    //  --------------------------------------------
+
+    .am-checkout.-modern {
+        .amwrap-gift-button {
+            margin: 0 0 @amwrap__indent__xl 0;
+        }
+
+        .amwrap-item-details > .amwrap-header {
+            padding: 0 @amwrap__indent__l 0 0;
+        }
+
+        .amwrap-checkout-product > .amwrap-image {
+            margin: 0 @amwrap__indent__l 0 0;
+        }
+    }
+
+    //
+    //  Internet Explorer Compatibility
+    //  --------------------------------------------
+
+    .ie11 .amwrap-items-list {
+        display: block;
+    }
+}

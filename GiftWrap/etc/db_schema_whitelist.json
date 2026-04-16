@@ -1,0 +1,301 @@
+{
+    "amasty_giftwrap_wrap": {
+        "column": {
+            "entity_id": true,
+            "created_at": true
+        },
+        "index": {
+            "PREF_AMASTY_GIFTWRAP_WRAP_ENTITY_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "amasty_giftwrap_wrap_store": {
+        "column": {
+            "entity_store_id": true,
+            "wrap_id": true,
+            "store_id": true,
+            "name": true,
+            "description": true,
+            "status": true,
+            "image": true,
+            "price": true,
+            "sort_order": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_3041916F57DFB0311DA7D7127B1B13D6": true,
+            "PREF_AMASTY_GIFTWRAP_WRAP_STORE_ENTITY_STORE_ID_STORE_ID": true
+        }
+    },
+    "amasty_giftwrap_message_card": {
+        "column": {
+            "entity_id": true,
+            "created_at": true
+        },
+        "index": {
+            "PREF_AMASTY_GIFTWRAP_MESSAGE_CARD_ENTITY_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "amasty_giftwrap_message_card_store": {
+        "column": {
+            "entity_store_id": true,
+            "message_card_id": true,
+            "store_id": true,
+            "name": true,
+            "status": true,
+            "image": true,
+            "price": true,
+            "sort_order": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_1DD5318918F76F268D1EBF708831F87E": true,
+            "PREF_AMASTY_GIFTWRAP_MESSAGE_CARD_STORE_ENTITY_STORE_ID_STORE_ID": true
+        }
+    },
+    "amasty_giftwrap_quote": {
+        "column": {
+            "entity_id": true,
+            "quote_id": true,
+            "total_price": true,
+            "base_total_price": true,
+            "total_tax_amount": true,
+            "base_total_tax_amount": true,
+            "total_price_incl_tax": true,
+            "base_total_price_incl_tax": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "PREF_AMASTY_GIFTWRAP_QUOTE_QUOTE_ID_PREF_QUOTE_ENTITY_ID": true,
+            "PREF_AMASTY_GIFTWRAP_QUOTE_QUOTE_ID": true
+        }
+    },
+    "amasty_giftwrap_quote_wrap": {
+        "column": {
+            "entity_id": true,
+            "quote_id": true,
+            "wrap_id": true,
+            "card_id": true,
+            "is_receipt_hidden": true,
+            "gift_message": true,
+            "price": true,
+            "base_price": true,
+            "card_price": true,
+            "base_card_price": true,
+            "tax_amount": true,
+            "base_tax_amount": true,
+            "card_tax_amount": true,
+            "base_card_tax_amount": true,
+            "price_incl_tax": true,
+            "base_price_incl_tax": true,
+            "card_price_incl_tax": true,
+            "base_card_price_incl_tax": true,
+            "wrap_name": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "amasty_giftwrap_quote_item": {
+        "column": {
+            "entity_id": true,
+            "quote_item_id": true,
+            "quote_wrap_id": true,
+            "wrap_qty": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_851BEA367FF609C3A5EB8744897B54A9": true,
+            "FK_0988875EE082038990E1FDF562763702": true
+        }
+    },
+    "amasty_giftwrap_quote_address": {
+        "column": {
+            "entity_id": true,
+            "quote_address_id": true,
+            "total_price": true,
+            "base_total_price": true,
+            "total_tax_amount": true,
+            "base_total_tax_amount": true,
+            "total_price_incl_tax": true,
+            "base_total_price_incl_tax": true,
+            "wrap_ids_count": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_A96FB11F0ED97D53C06707AD630D8726": true,
+            "PREF_AMASTY_GIFTWRAP_QUOTE_ADDRESS_QUOTE_ADDRESS_ID": true
+        }
+    },
+    "amasty_giftwrap_order": {
+        "column": {
+            "entity_id": true,
+            "order_id": true,
+            "total_price": true,
+            "base_total_price": true,
+            "tax_amount": true,
+            "base_tax_amount": true,
+            "total_tax_amount": true,
+            "base_total_tax_amount": true,
+            "total_price_incl_tax": true,
+            "base_total_price_incl_tax": true,
+            "total_price_invoiced": true,
+            "base_total_price_invoiced": true,
+            "total_tax_amount_invoiced": true,
+            "base_total_tax_amount_invoiced": true,
+            "total_price_refunded": true,
+            "base_total_price_refunded": true,
+            "total_tax_amount_refunded": true,
+            "base_total_tax_amount_refunded": true,
+            "base_total_tax_invoiced": true,
+            "total_tax_invoiced": true,
+            "base_total_tax_refunded": true,
+            "total_tax_refunded": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "PREF_AMASTY_GIFTWRAP_ORDER_ORDER_ID_PREF_SALES_ORDER_ENTITY_ID": true,
+            "PREF_AMASTY_GIFTWRAP_ORDER_ORDER_ID": true
+        }
+    },
+    "amasty_giftwrap_order_wrap": {
+        "column": {
+            "entity_id": true,
+            "order_id": true,
+            "wrap_id": true,
+            "card_id": true,
+            "is_receipt_hidden": true,
+            "gift_message": true,
+            "price": true,
+            "base_price": true,
+            "card_price": true,
+            "base_card_price": true,
+            "tax_amount": true,
+            "base_tax_amount": true,
+            "card_tax_amount": true,
+            "base_card_tax_amount": true,
+            "price_incl_tax": true,
+            "base_price_incl_tax": true,
+            "card_price_incl_tax": true,
+            "base_card_price_incl_tax": true,
+            "card_price_invoiced": true,
+            "base_card_price_invoiced": true,
+            "price_invoiced": true,
+            "base_price_invoiced": true,
+            "tax_amount_invoiced": true,
+            "base_tax_amount_invoiced": true,
+            "price_refunded": true,
+            "base_price_refunded": true,
+            "price_card_refunded": true,
+            "base_card_price_refunded": true,
+            "tax_amount_refunded": true,
+            "base_tax_amount_refunded": true,
+            "wrap_name": true,
+            "card_name": true,
+            "base_card_tax_amount_invoiced": true,
+            "card_tax_amount_invoiced": true,
+            "base_card_tax_amount_refunded": true,
+            "card_tax_amount_refunded": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "amasty_giftwrap_order_item": {
+        "column": {
+            "entity_id": true,
+            "order_item_id": true,
+            "quote_wrap_id": true,
+            "wrap_qty": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_AE063C3C4660244318C74CEDDE5C0F99": true
+        }
+    },
+    "amasty_giftwrap_invoice": {
+        "column": {
+            "entity_id": true,
+            "invoice_id": true,
+            "total_price": true,
+            "base_total_price": true,
+            "tax_amount": true,
+            "base_tax_amount": true,
+            "total_tax_amount": true,
+            "base_total_tax_amount": true,
+            "total_price_incl_tax": true,
+            "base_total_price_incl_tax": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_2A79F742DED261CF37D5BCD6641A4508": true,
+            "PREF_AMASTY_GIFTWRAP_INVOICE_INVOICE_ID": true
+        }
+    },
+    "amasty_giftwrap_creditmemo": {
+        "column": {
+            "entity_id": true,
+            "creditmemo_id": true,
+            "total_price": true,
+            "base_total_price": true,
+            "tax_amount": true,
+            "base_tax_amount": true,
+            "total_tax_amount": true,
+            "base_total_tax_amount": true,
+            "total_price_incl_tax": true,
+            "base_total_price_incl_tax": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_634CDAEFE39F26653ADB4926E518C123": true,
+            "PREF_AMASTY_GIFTWRAP_CREDITMEMO_CREDITMEMO_ID": true
+        }
+    },
+    "amasty_giftwrap_quote_address_wrap": {
+        "column": {
+            "entity_id": true,
+            "card_id": true,
+            "wrap_id": true,
+            "price": true,
+            "base_price": true,
+            "card_price": true,
+            "base_card_price": true,
+            "tax_amount": true,
+            "base_tax_amount": true,
+            "card_tax_amount": true,
+            "base_card_tax_amount": true,
+            "price_incl_tax": true,
+            "base_price_incl_tax": true,
+            "card_price_incl_tax": true,
+            "base_card_price_incl_tax": true,
+            "quote_address_id": true,
+            "is_receipt_hidden": true,
+            "gift_message": true,
+            "wrap_name": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_EB9E087ED818EB43CB9E09BACFA060EF": true,
+            "EB9E087ED818EB43CB9E09BACFA060EF": true
+        }
+    },
+    "amasty_giftwrap_quote_address_item": {
+        "column": {
+            "entity_id": true,
+            "quote_item_id": true,
+            "quote_wrap_id": true,
+            "wrap_qty": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_4D10E59901FEF1767AE8FE9388D2D031": true,
+            "FK_155E47CE185F15F1AB3F010A6749E817": true,
+            "PREF_AMASTY_GIFTWRAP_QUOTE_ADDR_WRAP_QUOTE_ITEM_ID_QUOTE_WRAP_ID": true
+        }
+    }
+}

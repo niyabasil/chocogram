@@ -1,0 +1,12 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */ /** @var \Amasty\GiftWrap\Block\Checkout\Cart\Wrap\Renderer $block */ ?>
+<button class="amwrap-btn -fill"
+        type="button" <?= !$block->isAddButtonActive() ? 'disabled' : ''?>
+        data-amwrap-js="cart-button"
+        data-amwrap-popup='open'>
+    <?= $block->escapeHtml(__('Add Gift Wrap')) ?>
+</button>

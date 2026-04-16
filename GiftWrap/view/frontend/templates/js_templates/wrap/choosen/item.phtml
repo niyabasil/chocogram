@@ -1,0 +1,75 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */
+?>
+<li class="amwrap-list-item" data-amwrap-js="list-item">
+    <% if (!data.isEdit) { %>
+    <label class="amwrap-checkbox-block">
+        <input type="checkbox"
+               class="amwrap-input"
+               data-amwrap-js="list-item-checkbox"
+               data-item-id="<%- data.item_id %>"
+        />
+        <i class="amwrap-mark"></i>
+    </label>
+    <% } %>
+    <div class="amwrap-img">
+        <img src="<%- data.product_image_src %>"
+             alt="<%- data.product_image_alt %>"
+        />
+    </div>
+    <div class="amwrap-content">
+        <h3 class="amwrap-name"><%- data.product_name %></h3>
+        <% if (data.options) { %>
+        <div class="amwrap-options">
+            <% _(data.options).each(function(option) { %>
+                <div class="amwrap-option">
+                    <span class="amwrap-label"><%- option.label %></span>
+                    <span class="amwrap-value"><%- option.value %></span>
+                </div>
+            <% }) %>
+        </div>
+        <% } %>
+    </div>
+    <% if (!data.isEdit && data.product_qty > 1) { %>
+    <div class="amwrap-qty">
+        <label class="amwrap-label"><?= $block->escapeHtml(__('Qty'));?></label>
+        <input type="number"
+               name="itemQty[<%- data.item_id %>]"
+               class="amwrap-input -unchecked"
+               value="<%- data.product_qty %>"
+               min="1"
+               max="<%- data.product_qty %>"
+               data-amwrap-js="qty"
+        />
+    </div>
+    <% } %>
+    <% if (data.isEdit && (data.product_wrapped_qty || data.product_qty)) { %>
+    <div class="amwrap-qty">
+        <label class="amwrap-label"><?= $block->escapeHtml(__('Qty'));?></label>
+        <input type="number"
+               name="itemQty[<%- data.item_id %>]"
+               class="amwrap-input -unchecked"
+               value="<%- data.product_wrapped_qty %>"
+               min="1"
+               max="<%- data.product_qty + data.product_wrapped_qty %>"
+               data-amwrap-js="qty"
+        />
+    </div>
+    <% } %>
+    <% if (data.isEdit) { %>
+    <label class="amwrap-checkbox-block -trash-btn" data-amwrap-js="delete-checkbox">
+        <input type="checkbox"
+               name="deleted[<%- data.item_id %>]"
+               class="amwrap-input"
+               data-amwrap-js="list-item-checkbox"
+               data-item-id="<%- data.item_id %>"
+               value="1"
+        />
+        <span class="amwrap-trash-btn"></span>
+    </label>
+    <% } %>
+</li>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <container name="amgiftwrap-container" htmlTag="div" htmlClass="amwrap-analytic" before="-">
+                <block class="Amasty\GiftWrap\Block\Adminhtml\Wrap\Analytic" name="amgiftwrap-analytic"
+                       template="Amasty_GiftWrap::analytic.phtml" />
+            </container>
+            <uiComponent name="amgiftwrap_wrap_listing"/>
+        </referenceContainer>
+    </body>
+</page>

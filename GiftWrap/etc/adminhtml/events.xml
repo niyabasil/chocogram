@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- TODO: use this observers for clone wraps from order for new order when order duplicated (edit, reorder actions, etc. ) -->
+    <event name="sales_convert_order_item_to_quote_item">
+        <observer name="Amasty_GiftWrap::ConvertOrderItem" instance="Amasty\GiftWrap\Observer\Adminhtml\ConvertOrderItem" />
+    </event>
+    <event name="sales_convert_order_to_quote">
+        <observer name="Amasty_GiftWrap::ConvertOrder" instance="Amasty\GiftWrap\Observer\Adminhtml\ConvertOrder" />
+    </event>
+
+    <!-- invalidate FPC cache after save models -->
+    <event name="amasty_gift_wrap_save_after">
+        <observer name="flush_all_pagecache" instance="Magento\PageCache\Observer\InvalidateCache" />
+    </event>
+    <event name="amasty_gift_card_save_after">
+        <observer name="flush_all_pagecache" instance="Magento\PageCache\Observer\InvalidateCache" />
+    </event>
+</config>

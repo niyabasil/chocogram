@@ -1,0 +1,75 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */
+use Amasty\GiftWrap\Block\Adminhtml\Wrap\Analytic;
+
+/** @var Analytic $block */
+?>
+<?php
+$wraps = $block->getMostPopularWraps();
+?>
+<?php if (count($wraps['items'])): ?>
+    <div class="amwrap-table-wrap">
+        <div class="amwrap-title"><?= $block->escapeHtml(__('Most Wanted Wraps')) ?></div>
+        <div class="amwrap-table-block">
+            <p class="amwrap-row -header">
+                <span class="amwrap-col"><?= $block->escapeHtml(__('Name')) ?></span>
+                <span class="amwrap-col"
+                      title="<?= $block->escapeHtml(__('Qty Sold')) ?>">
+                    <?= $block->escapeHtml(__('Qty Sold')) ?>
+                </span>
+                <span class="amwrap-col"
+                      title="<?= $block->escapeHtml(__('Revenue')) ?>">
+                    <?= $block->escapeHtml(__('Revenue')) ?>
+                </span>
+            </p>
+
+            <?php foreach ($wraps['items'] as $wrap): ?>
+            <p class="amwrap-row">
+                <span class="amwrap-col"><?= $block->escapeHtml($wrap[Analytic::FIELD_NAME]) ?></span>
+                <span class="amwrap-col" title="<?= $block->escapeHtml($wrap[Analytic::FIELD_QTY]) ?>">
+                    <?= $block->escapeHtml($wrap[Analytic::FIELD_QTY]) ?>
+                </span>
+                <span class="amwrap-col" title="<?= $block->escapeHtml($wrap[Analytic::FIELD_TOTAL]) ?>">
+                    <?= $block->escapeHtml($wrap[Analytic::FIELD_TOTAL]) ?>
+                </span>
+            </p>
+            <?php endforeach; ?>
+
+            <p class="amwrap-row -footer">
+                <span class="amwrap-col"><?= $block->escapeHtml(__('Total')) ?></span>
+                <span class="amwrap-col" title="<?= $block->escapeHtml($wraps['total'][Analytic::FIELD_QTY]) ?>">
+                    <?= $block->escapeHtml($wraps['total'][Analytic::FIELD_QTY]) ?>
+                </span>
+                <span class="amwrap-col" title="<?= $block->escapeHtml($wraps['total'][Analytic::FIELD_TOTAL]) ?>">
+                    <?= $block->escapeHtml($wraps['total'][Analytic::FIELD_TOTAL]) ?>
+                </span>
+            </p>
+        </div>
+    </div>
+    <div class="amwrap-chart-wrap">
+        <div class="amwrap-title"><?= $block->escapeHtml(__('Overview'))?></div>
+        <div data-amwrap-js="overview-block">
+            <div id="amwrap-overview" class="amwrap-overview-inner"></div>
+        </div>
+    </div>
+
+    <script>
+        require([
+            "Amasty_GiftWrap/vendor/amcharts4/core.min"
+        ], function () {
+            require([
+                "jquery",
+                "Amasty_GiftWrap/js/charts/columnCharts"
+            ], function ($) {
+                $("[data-amwrap-js='overview-block']").columnCharts({
+                    "data": <?= /* @noEscape */ $block->getStatistics(); ?>,
+                    "wraps": <?= /* @noEscape */ $block->getWrapNames(); ?>
+                });
+            });
+        });
+    </script>
+<?php endif; ?>

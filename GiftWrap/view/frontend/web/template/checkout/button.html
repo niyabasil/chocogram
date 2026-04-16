@@ -1,0 +1,15 @@
+<!-- ko if: getIsAvailable() -->
+<div class="amwrap-gift-button">
+    <button class="amwrap-btn -fill"
+            type="button"
+            data-bind="css: { '-active': getIsButtonEnabled() },
+                       visible: isVisible,
+                       attr: { 'disabled': !status() },
+                       afterRender: afterKoRender"
+            data-amwrap-popup='open'
+            data-amwrap-js="gift-button"
+    >
+        <!-- ko i18n: 'Add Gift Wrap' --><!-- /ko -->
+    </button>
+</div>
+<!-- /ko -->

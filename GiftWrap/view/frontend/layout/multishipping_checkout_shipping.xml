@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Amasty_Base::vendor/slick/amslick.min.css"/>
+    </head>
+
+    <body>
+        <block class="Amasty\GiftWrap\Block\Product\View" name="amgiftwrap.multishipping" template="Amasty_GiftWrap::product/gift_wrap.phtml">
+                <arguments>
+                    <argument name="skip_validation" xsi:type="boolean">true</argument>
+                </arguments>
+                <block class="Amasty\GiftWrap\Block\Product\View\Messages"
+                       name="amgiftwrap.messages"
+                       as="messages"
+                       template="Amasty_GiftWrap::components/messages.phtml" />
+                <block class="Amasty\GiftWrap\Block\Product\View\Checker"
+                       name="amgiftwrap.product.checker"
+                       as="checker"
+                       template="Amasty_GiftWrap::components/make_checker.phtml"/>
+                <block class="Amasty\GiftWrap\Block\Product\View\Card"
+                       name="amgiftwrap.cart.toolbar"
+                       as="toolbar"
+                       template="Amasty_GiftWrap::components/toolbar.phtml"/>
+                <block class="Amasty\GiftWrap\Block\Product\View\Wrap"
+                       name="amgiftwrap.cart.wrap"
+                       as="wrap"
+                       template="Amasty_GiftWrap::steps/wrap.phtml"/>
+                <block class="Amasty\GiftWrap\Block\Product\View\Card"
+                       name="amgiftwrap.cart.card"
+                       as="card"
+                       template="Amasty_GiftWrap::steps/card.phtml"/>
+                <block class="Magento\Framework\View\Element\Template"
+                       name="amgiftwrap.cart.finish"
+                       as="finish"
+                       template="Amasty_GiftWrap::steps/finish.phtml"/>
+                <block class="Amasty\GiftWrap\Block\Product\View\Buttons"
+                       name="amgiftwrap.cart.buttons"
+                       as="buttons"
+                       template="Amasty_GiftWrap::components/buttons_toolbar.phtml">
+                    <arguments>
+                        <argument name="save_ajax" xsi:type="boolean">false</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Template"
+                       name="amgiftwrap.product.selected.items"
+                       as="multishipping_selected"
+                       after="amgiftwrap.cart.buttons"
+                       template="Amasty_GiftWrap::product/selected_items.phtml">
+                    <arguments>
+                        <argument name="skip_validation" xsi:type="boolean">true</argument>
+                    </arguments>
+                </block>
+            </block>
+        <block class="Magento\Framework\View\Element\Template"
+               name="amgiftwrap.prices.checkbox"
+               as="prices-checkbox"
+               template="Amasty_GiftWrap::components/prices-checkbox.phtml"/>
+    </body>
+</page>

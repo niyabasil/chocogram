@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\GiftWrap\Api\Data\WrapInterface" type="Amasty\GiftWrap\Model\Wrapper\Wrap" />
+    <preference for="Amasty\GiftWrap\Api\WrapRepositoryInterface" type="Amasty\GiftWrap\Model\Wrapper\WrapRepository" />
+    <preference for="Amasty\GiftWrap\Api\Data\MessageCardInterface" type="Amasty\GiftWrap\Model\MessageCard\MessageCard" />
+    <preference for="Amasty\GiftWrap\Api\MessageCardRepositoryInterface" type="Amasty\GiftWrap\Model\MessageCard\MessageCardRepository" />
+
+    <preference for="Amasty\GiftWrap\Api\SaleData\SaleDataResourceInterface"
+                type="Amasty\GiftWrap\Model\SaleData\ResourceModel\SaleData" />
+
+    <preference for="Amasty\GiftWrap\Api\SaleData\WrapInterface" type="Amasty\GiftWrap\Model\SaleData\Quote\Wrap" />
+    <preference for="Amasty\GiftWrap\Api\SaleData\WrapRepositoryInterface" type="Amasty\GiftWrap\Model\SaleData\Quote\WrapRepository" />
+    <preference for="Amasty\GiftWrap\Api\Data\WrapSearchResultsInterface" type="Amasty\GiftWrap\Model\WrapSearchResults" />
+    <preference for="Amasty\GiftWrap\Api\Data\MessageCardSearchResultsInterface" type="Amasty\GiftWrap\Model\MessageCardSearchResults" />
+
+    <type name="Magento\Framework\Setup\Declaration\Schema\Operations\CreateTable">
+        <arguments>
+            <argument name="triggers" xsi:type="array">
+                <item name="migrateDataFromAnotherTable" xsi:type="object">Magento\Framework\Setup\Declaration\Schema\Db\MySQL\DDL\Triggers\MigrateDataFromAnotherTable</item>
+                <item name="amMigrateDataFromAnotherTableIfExists" xsi:type="object">Amasty\GiftWrap\Setup\Declaration\Schema\Db\MySQL\DDL\Triggers\MigrateDataFromAnotherTableIfExists</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\GiftWrap\Controller\Adminhtml\Uploader\UploadImage">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Amasty\GiftWrap\VirtualType\Model\ImageUpload</argument>
+        </arguments>
+    </type>
+
+    <type name="Amasty\GiftWrap\Model\ImageProcessor">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Amasty\GiftWrap\VirtualType\Model\ImageUpload</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="amgiftwrap_wrap_listing_data_source" xsi:type="string">Amasty\GiftWrap\Model\Wrapper\ResourceModel\Grid\Collection</item>
+                <item name="amgiftwrap_message_card_listing_data_source" xsi:type="string">Amasty\GiftWrap\Model\MessageCard\ResourceModel\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Amasty\GiftWrap\VirtualType\Model\ImageUpload" type="Magento\Catalog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="const">Amasty\GiftWrap\Model\ImageProcessor::MEDIA_TMP_PATH</argument>
+            <argument name="basePath" xsi:type="const">Amasty\GiftWrap\Model\ImageProcessor::MEDIA_PATH</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Checkout\Model\Cart\RequestInfoFilter">
+        <arguments>
+            <argument name="filterList" xsi:type="array">
+                <item name="amwrap" xsi:type="string">amwrap</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- ==================== Sale Data Operations ======================== -->
+    <type name="Magento\Quote\Model\Quote">
+        <plugin name="Amasty_GiftWrap::SaleDataOperations"
+                type="Amasty\GiftWrap\Plugin\Quote\Model\QuotePlugin" />
+    </type>
+
+    <type name="Magento\Quote\Model\QuoteRepository\LoadHandler">
+        <plugin name="Amasty_GiftWrap::SaleDataOperations"
+                type="Amasty\GiftWrap\Plugin\Quote\Model\QuoteRepository\LoadHandlerPlugin" />
+    </type>
+
+    <type name="Magento\Quote\Model\QuoteRepository\SaveHandler">
+        <plugin name="Amasty_GiftWrap::SaleDataOperations"
+                type="Amasty\GiftWrap\Plugin\Quote\Model\QuoteRepository\SaveHandlerPlugin" />
+    </type>
+
+    <type name="Magento\Quote\Model\Quote\Item">
+        <plugin name="Amasty_GiftWrap::SaleDataOperations"
+                type="Amasty\GiftWrap\Plugin\Quote\Model\Quote\ItemPlugin" />
+    </type>
+
+    <type name="Magento\Quote\Model\ResourceModel\Quote\Item\Collection">
+        <plugin name="Amasty_GiftWrap::SaleDataOperations"
+                type="Amasty\GiftWrap\Plugin\Quote\Model\ResourceModel\Quote\Item\CollectionPlugin" />
+    </type>
+
+    <type name="Magento\Quote\Model\Quote\Item\ToOrderItem">
+        <plugin name="Amasty_GiftWrap::SaleDataOperations"
+                type="Amasty\GiftWrap\Plugin\Quote\Model\Quote\Item\ToOrderItemPlugin" />
+    </type>
+
+    <type name="Magento\Sales\Model\Order">
+        <plugin name="Amasty_GiftWrap::SaleDataOperations"
+                type="Amasty\GiftWrap\Plugin\Sales\Model\OrderPlugin" />
+    </type>
+
+    <type name="Magento\Sales\Model\OrderRepository">
+        <plugin name="Amasty_GiftWrap::SaleDataOperations"
+                type="Amasty\GiftWrap\Plugin\Sales\Model\OrderRepositoryPlugin" />
+    </type>
+
+    <type name="Magento\Sales\Model\Order\Item">
+        <plugin name="Amasty_GiftWrap::SaleDataOperations"
+                type="Amasty\GiftWrap\Plugin\Sales\Model\Order\ItemPlugin" />
+    </type>
+
+    <type name="Magento\Sales\Model\Order\ItemRepository">
+        <plugin name="Amasty_GiftWrap::SaleDataOperations"
+                type="Amasty\GiftWrap\Plugin\Sales\Model\Order\ItemRepositoryPlugin" />
+    </type>
+
+    <type name="Magento\Sales\Model\Order\Invoice">
+        <plugin name="Amasty_GiftWrap::SaleDataOperations"
+                type="Amasty\GiftWrap\Plugin\Sales\Model\Order\InvoicePlugin" />
+    </type>
+
+    <type name="Magento\Sales\Model\Order\Creditmemo">
+        <plugin name="Amasty_GiftWrap::SaleDataOperations"
+                type="Amasty\GiftWrap\Plugin\Sales\Model\Order\CreditmemoPlugin" />
+    </type>
+
+    <type name="Magento\Sales\Model\Order\CreditmemoRepository">
+        <plugin name="Amasty_GiftWrap::SaleDataOperations"
+                type="Amasty\GiftWrap\Plugin\Sales\Model\Order\CreditmemoRepositoryPlugin" />
+    </type>
+
+    <type name="Magento\Sales\Model\ResourceModel\Order\Creditmemo\Collection">
+        <plugin name="Amasty_GiftWrap::SaleDataOperations"
+                type="Amasty\GiftWrap\Plugin\Sales\Model\ResourceModel\Order\Creditmemo\CollectionPlugin" />
+    </type>
+
+    <type name="Magento\Sales\Model\ResourceModel\Order\Invoice\Collection">
+        <plugin name="Amasty_GiftWrap::SaleDataOperations"
+                type="Amasty\GiftWrap\Plugin\Sales\Model\ResourceModel\Order\Invoice\CollectionPlugin" />
+    </type>
+
+    <type name="Magento\Quote\Model\Quote\Address">
+        <plugin name="Amasty_GiftWrap::SaleDataOperations"
+                type="Amasty\GiftWrap\Plugin\Quote\Model\Quote\AddressPlugin" />
+    </type>
+
+    <type name="Magento\Quote\Model\Quote\Address\Item">
+        <plugin name="Amasty_GiftWrap::SaleDataOperations"
+                type="Amasty\GiftWrap\Plugin\Quote\Model\Quote\Address\ItemPlugin" />
+    </type>
+
+    <type name="Magento\Quote\Model\ResourceModel\Quote\Address\Collection">
+        <plugin name="Amasty_GiftWrap::SaleDataOperations"
+                type="Amasty\GiftWrap\Plugin\Quote\Model\ResourceModel\Quote\Address\CollectionPlugin" />
+    </type>
+
+    <type name="Magento\Quote\Model\ResourceModel\Quote\Address\Item\Collection">
+        <plugin name="Amasty_GiftWrap::SaleDataOperations"
+                type="Amasty\GiftWrap\Plugin\Quote\Model\ResourceModel\Quote\Address\Item\CollectionPlugin" />
+    </type>
+
+    <!-- move wrap items when quote items merged (ex. customer logged in) -->
+    <type name="Magento\Quote\Model\Quote\Item\Processor">
+        <plugin name="Amasty_GiftWrap::SaleDataOperations"
+                type="Amasty\GiftWrap\Plugin\Quote\Model\Quote\Item\ProcessorPlugin" />
+    </type>
+
+    <!-- /==================== Sale Data Operations ========================/ -->
+
+    <type name="Magento\Quote\Model\Cart\TotalsConverter">
+        <plugin name="Amasty_GiftWrap::TotalsConvert" type="Amasty\GiftWrap\Plugin\Quote\Model\Cart\TotalsConverterPlugin" />
+    </type>
+
+    <!-- add info about AVAILABLE_FOR_WRAPPING attribute into cart section -->
+    <type name="Magento\Checkout\CustomerData\AbstractItem">
+        <plugin name="Amasty_GiftWrap::add-giftwrap-info" type="Amasty\GiftWrap\Plugin\Checkout\CustomerData\AbstractItemPlugin" />
+    </type>
+
+    <!-- add in section info about of quote wraps in cart -->
+    <type name="Magento\Checkout\CustomerData\Cart">
+        <plugin name="Amasty_GiftWrap::add-wraps-info" type="Amasty\GiftWrap\Plugin\Checkout\CustomerData\CartPlugin" />
+    </type>
+
+    <!-- add block with wraps on multishipping page -->
+    <type name="Magento\Multishipping\Block\Checkout\Shipping">
+        <plugin name="Amasty_GiftWrap::add-wrapping-block" type="Amasty\GiftWrap\Plugin\Multishipping\Block\Checkout\ShippingPlugin" />
+    </type>
+
+    <type name="Amasty\GiftWrap\Model\SaleData\WrapManagement">
+        <arguments>
+            <argument name="addressWrapRepository" xsi:type="object">Amasty\GiftWrap\Model\SaleData\Address\WrapRepository\Proxy</argument>
+            <argument name="quoteWrapRepository" xsi:type="object">Amasty\GiftWrap\Model\SaleData\Quote\WrapRepository\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Sales\Block\Order\Email\Items">
+        <plugin name="add_gift_wrap_info"
+                type="Amasty\GiftWrap\Plugin\Sales\Block\Order\Email\Items\AddGiftWrapInfo" />
+    </type>
+
+    <!-- GiftCard Compatibility -->
+    <type name="Amasty\GiftCardAccount\Model\GiftCardExtension\Quote\AllowedTotalModifiersPool">
+        <arguments>
+            <argument name="modifiersConfig" xsi:type="array">
+                <item name="Amasty_GiftWrap" xsi:type="array">
+                    <item name="0" xsi:type="array">
+                        <item name="id" xsi:type="string">allow_to_paid_for_gift_wrap</item>
+                        <item name="label" xsi:type="string" translate="true">Use a Gift Card to Pay for Gift Wrap</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/sales.xsd">
+    <section name="quote">
+        <group name="totals">
+            <item name="am_gift_wrap_quote" instance="Amasty\GiftWrap\Model\Total\Quote\GiftWrap" sort_order="190">
+                <renderer name="frontend" instance="Amasty\GiftWrap\Block\Checkout\Totals"/>
+            </item>
+            <item name="am_gift_wrap_tax_before" instance="Amasty\GiftWrap\Model\Total\Quote\Tax\BeforeTax" sort_order="425">
+                <renderer name="frontend" instance="Amasty\GiftWrap\Block\Checkout\EmptyTotal" />
+            </item>
+            <item name="am_gift_wrap_tax_after" instance="Amasty\GiftWrap\Model\Total\Quote\Tax\AfterTax" sort_order="475">
+                <renderer name="frontend" instance="Amasty\GiftWrap\Block\Checkout\EmptyTotal" />
+            </item>
+        </group>
+    </section>
+    <section name="order_invoice">
+        <group name="totals">
+            <item name="am_gift_wrap_invoice" instance="Amasty\GiftWrap\Model\Total\Invoice\GiftWrap" sort_order="400"/>
+            <item name="am_gift_wrap_invoice_tax" instance="Amasty\GiftWrap\Model\Total\Invoice\Tax\GiftWrap" sort_order="300"/>
+        </group>
+    </section>
+    <section name="order_creditmemo">
+        <group name="totals">
+            <item name="am_gift_wrap_invoice_creditmemo" instance="Amasty\GiftWrap\Model\Total\Creditmemo\GiftWrap" sort_order="450"/>
+            <item name="am_gift_wrap_invoice_creditmemo_tax" instance="Amasty\GiftWrap\Model\Total\Creditmemo\Tax\GiftWrap" sort_order="350"/>
+        </group>
+    </section>
+</config>

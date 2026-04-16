@@ -1,0 +1,485 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) Amasty (https://www.amasty.com)
+ * @package Gift Wrap for Magento 2
+ */-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="amasty_giftwrap_wrap" resource="default" engine="innodb" comment="Gift Wrap Table">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Gift Wrap Link ID"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="AMASTY_GIFTWRAP_WRAP_ENTITY_ID" indexType="btree">
+            <column name="entity_id"/>
+        </index>
+    </table>
+    <table name="amasty_giftwrap_wrap_store" resource="default" engine="innodb" comment="Gift Wrap Table">
+        <column xsi:type="int" name="entity_store_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Gift Wrap Item Auto ID"/>
+        <column xsi:type="int" name="wrap_id" padding="11" unsigned="false" nullable="false" identity="false"
+                comment="Gift Wrap Item ID"/>
+        <column xsi:type="int" name="store_id" padding="11" unsigned="false" nullable="false" identity="false"
+                comment="Store ID"/>
+        <column xsi:type="varchar" name="name" nullable="true" length="255" comment="Gift Wrap Item Name"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Gift Wrap Item Description"/>
+        <column xsi:type="boolean" name="status" nullable="true" comment="Gift Wrap Item Status"/>
+        <column xsi:type="varchar" name="image" nullable="true" length="255" comment="Gift Wrap Item Image"/>
+        <column xsi:type="decimal" name="price" scale="2" precision="12" unsigned="false" nullable="true"
+                comment="Gift Wrap Item Price"/>
+        <column xsi:type="int" name="sort_order" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Gift Wrap Item Sort Order"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_3041916F57DFB0311DA7D7127B1B13D6"
+                    table="amasty_giftwrap_wrap_store" column="wrap_id" referenceTable="amasty_giftwrap_wrap"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="AMASTY_GIFTWRAP_WRAP_STORE_ENTITY_STORE_ID_STORE_ID">
+            <column name="entity_store_id"/>
+            <column name="store_id"/>
+        </constraint>
+    </table>
+    <table name="amasty_giftwrap_message_card" resource="default" engine="innodb" comment="Gift Message Card Table">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Gift Message Card ID"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="AMASTY_GIFTWRAP_MESSAGE_CARD_ENTITY_ID" indexType="btree">
+            <column name="entity_id"/>
+        </index>
+    </table>
+    <table name="amasty_giftwrap_message_card_store" resource="default" engine="innodb"
+           comment="Gift Gift Message Card Store Table">
+        <column xsi:type="int" name="entity_store_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Gift Message Card Auto ID"/>
+        <column xsi:type="int" name="message_card_id" padding="11" unsigned="false" nullable="false" identity="false"
+                comment="Gift Message Card ID"/>
+        <column xsi:type="int" name="store_id" padding="11" unsigned="false" nullable="false" identity="false"
+                comment="Store ID"/>
+        <column xsi:type="varchar" name="name" nullable="true" length="255" comment="Gift Message Card Name"/>
+        <column xsi:type="boolean" name="status" nullable="true" comment="Gift Message Card Status"/>
+        <column xsi:type="varchar" name="image" nullable="true" length="255" comment="Gift Message Card Image"/>
+        <column xsi:type="decimal" name="price" scale="2" precision="12" unsigned="false" nullable="true"
+                comment="Gift Message Card Price"/>
+        <column xsi:type="int" name="sort_order" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Gift Message Card Sort Order"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_1DD5318918F76F268D1EBF708831F87E"
+                    table="amasty_giftwrap_message_card_store" column="message_card_id"
+                    referenceTable="amasty_giftwrap_message_card" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="AMASTY_GIFTWRAP_MESSAGE_CARD_STORE_ENTITY_STORE_ID_STORE_ID">
+            <column name="entity_store_id"/>
+            <column name="store_id"/>
+        </constraint>
+    </table>
+    <table name="amasty_giftwrap_quote" resource="default" engine="innodb" comment="Gift Wrap Quote Table">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="quote_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Quote ID"/>
+        <column xsi:type="decimal" name="total_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Total Price"/>
+        <column xsi:type="decimal" name="base_total_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Total Price"/>
+        <column xsi:type="decimal" name="total_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Total Tax Amount"/>
+        <column xsi:type="decimal" name="base_total_tax_amount" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Total Tax Amount"/>
+        <column xsi:type="decimal" name="total_price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Total Price Incl. Tax"/>
+        <column xsi:type="decimal" name="base_total_price_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Total Price Incl. Tax"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AMASTY_GIFTWRAP_QUOTE_QUOTE_ID_QUOTE_ENTITY_ID"
+                    table="amasty_giftwrap_quote" column="quote_id" referenceTable="quote" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="AMASTY_GIFTWRAP_QUOTE_QUOTE_ID">
+            <column name="quote_id"/>
+        </constraint>
+    </table>
+    <table name="amasty_giftwrap_quote_wrap" resource="default" engine="innodb" comment="amasty_giftwrap_quote_wrap">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="quote_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Quote ID"/>
+        <column xsi:type="int" name="wrap_id" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Wrap ID"/>
+        <column xsi:type="int" name="card_id" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Message Card ID"/>
+        <column xsi:type="int" name="is_receipt_hidden" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Is Receipt Hidden Flag"/>
+        <column xsi:type="text" name="gift_message" nullable="true" comment="Gift Message"/>
+        <column xsi:type="decimal" name="price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Price"/>
+        <column xsi:type="decimal" name="base_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Price"/>
+        <column xsi:type="decimal" name="card_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Card Price"/>
+        <column xsi:type="decimal" name="base_card_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Card Price"/>
+        <column xsi:type="decimal" name="tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Tax Amount"/>
+        <column xsi:type="decimal" name="base_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Tax Amount"/>
+        <column xsi:type="decimal" name="card_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Card Tax Amount"/>
+        <column xsi:type="decimal" name="base_card_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Card Tax Amount"/>
+        <column xsi:type="decimal" name="price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Price Incl. Tax"/>
+        <column xsi:type="decimal" name="base_price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Price Incl. Tax"/>
+        <column xsi:type="decimal" name="card_price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Card Price Incl. Tax"/>
+        <column xsi:type="decimal" name="base_card_price_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Card Price Incl. Tax"/>
+        <column xsi:type="varchar" name="wrap_name" nullable="true" length="255" comment="Quote Wrap Name"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+    <table name="amasty_giftwrap_quote_item" resource="default" engine="innodb" comment="Gift Wrap Quote Item Table">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="quote_item_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Quote Item ID"/>
+        <column xsi:type="int" name="quote_wrap_id" padding="11" unsigned="false" nullable="false" identity="false"
+                comment="Quote Wrap ID"/>
+        <column xsi:type="decimal" name="wrap_qty" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Wrapping Requested Qty"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_851BEA367FF609C3A5EB8744897B54A9"
+                    table="amasty_giftwrap_quote_item" column="quote_item_id" referenceTable="quote_item"
+                    referenceColumn="item_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_0988875EE082038990E1FDF562763702"
+                    table="amasty_giftwrap_quote_item" column="quote_wrap_id"
+                    referenceTable="amasty_giftwrap_quote_wrap" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+    <table name="amasty_giftwrap_quote_address" resource="default" engine="innodb"
+           comment="Gift Wrap Quote Address Table">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="quote_address_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Quote Address ID"/>
+        <column xsi:type="decimal" name="total_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Total Price"/>
+        <column xsi:type="decimal" name="base_total_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Total Price"/>
+        <column xsi:type="decimal" name="total_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Total Tax Amount"/>
+        <column xsi:type="decimal" name="base_total_tax_amount" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Total Tax Amount"/>
+        <column xsi:type="decimal" name="total_price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Total Price Incl. Tax"/>
+        <column xsi:type="decimal" name="base_total_price_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Total Price Incl. Tax"/>
+        <column xsi:type="int" name="wrap_ids_count" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Count wraps"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_A96FB11F0ED97D53C06707AD630D8726"
+                    table="amasty_giftwrap_quote_address" column="quote_address_id" referenceTable="quote_address"
+                    referenceColumn="address_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="AMASTY_GIFTWRAP_QUOTE_ADDRESS_QUOTE_ADDRESS_ID">
+            <column name="quote_address_id"/>
+        </constraint>
+    </table>
+    <table name="amasty_giftwrap_order" resource="default" engine="innodb" comment="Gift Wrap Order Table">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Order ID"/>
+        <column xsi:type="decimal" name="total_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Total Price"/>
+        <column xsi:type="decimal" name="base_total_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Total Price"/>
+        <column xsi:type="decimal" name="tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Tax Amount"/>
+        <column xsi:type="decimal" name="base_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Tax Amount"/>
+        <column xsi:type="decimal" name="total_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Total Tax Amount"/>
+        <column xsi:type="decimal" name="base_total_tax_amount" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Total Tax Amount"/>
+        <column xsi:type="decimal" name="total_price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Total Price Incl. Tax"/>
+        <column xsi:type="decimal" name="base_total_price_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Total Price Incl. Tax"/>
+        <column xsi:type="decimal" name="total_price_invoiced" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Total Price Invoiced"/>
+        <column xsi:type="decimal" name="base_total_price_invoiced" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Total Price Invoiced"/>
+        <column xsi:type="decimal" name="total_tax_amount_invoiced" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Total Tax Amount Invoiced"/>
+        <column xsi:type="decimal" name="base_total_tax_amount_invoiced" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Total Tax Amount Invoiced"/>
+        <column xsi:type="decimal" name="total_price_refunded" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Total Price Refunded"/>
+        <column xsi:type="decimal" name="base_total_price_refunded" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Total Price Refunded"/>
+        <column xsi:type="decimal" name="total_tax_amount_refunded" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Total Tax Amount Refunded"/>
+        <column xsi:type="decimal" name="base_total_tax_amount_refunded" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Total Tax Amount Refunded"/>
+        <column xsi:type="decimal" name="base_total_tax_invoiced" scale="0" precision="10" unsigned="false"
+                nullable="true" comment="Base Total Tax Invoiced"/>
+        <column xsi:type="decimal" name="total_tax_invoiced" scale="0" precision="10" unsigned="false" nullable="true"
+                comment="Total Tax Invoiced"/>
+        <column xsi:type="decimal" name="base_total_tax_refunded" scale="0" precision="10" unsigned="false"
+                nullable="true" comment="Base Total Tax Refunded"/>
+        <column xsi:type="decimal" name="total_tax_refunded" scale="0" precision="10" unsigned="false" nullable="true"
+                comment="Total Tax Refunded"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AMASTY_GIFTWRAP_ORDER_ORDER_ID_SALES_ORDER_ENTITY_ID"
+                    table="amasty_giftwrap_order" column="order_id" referenceTable="sales_order"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="AMASTY_GIFTWRAP_ORDER_ORDER_ID">
+            <column name="order_id"/>
+        </constraint>
+    </table>
+    <table name="amasty_giftwrap_order_wrap" resource="default" engine="innodb" comment="amasty_giftwrap_order_wrap">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Order ID"/>
+        <column xsi:type="int" name="wrap_id" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Wrap ID"/>
+        <column xsi:type="int" name="card_id" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Message Card ID"/>
+        <column xsi:type="int" name="is_receipt_hidden" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Is Receipt Hidden Flag"/>
+        <column xsi:type="text" name="gift_message" nullable="true" comment="Gift Message"/>
+        <column xsi:type="decimal" name="price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Price"/>
+        <column xsi:type="decimal" name="base_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Price"/>
+        <column xsi:type="decimal" name="card_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Card Price"/>
+        <column xsi:type="decimal" name="base_card_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Card Price"/>
+        <column xsi:type="decimal" name="tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Tax Amount"/>
+        <column xsi:type="decimal" name="base_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Tax Amount"/>
+        <column xsi:type="decimal" name="card_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Card Tax Amount"/>
+        <column xsi:type="decimal" name="base_card_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Card Tax Amount"/>
+        <column xsi:type="decimal" name="price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Price Incl. Tax"/>
+        <column xsi:type="decimal" name="base_price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Price Incl. Tax"/>
+        <column xsi:type="decimal" name="card_price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Card Price Incl. Tax"/>
+        <column xsi:type="decimal" name="base_card_price_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Card Price Incl. Tax"/>
+        <column xsi:type="decimal" name="card_price_invoiced" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Price Invoiced"/>
+        <column xsi:type="decimal" name="base_card_price_invoiced" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Price Invoiced"/>
+        <column xsi:type="decimal" name="price_invoiced" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Price Invoiced"/>
+        <column xsi:type="decimal" name="base_price_invoiced" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Price Invoiced"/>
+        <column xsi:type="decimal" name="tax_amount_invoiced" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Tax Amount Invoiced"/>
+        <column xsi:type="decimal" name="base_tax_amount_invoiced" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Tax Amount Invoiced"/>
+        <column xsi:type="decimal" name="price_refunded" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Price Refunded"/>
+        <column xsi:type="decimal" name="base_price_refunded" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Price Refunded"/>
+        <column xsi:type="decimal" name="price_card_refunded" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Price Refunded"/>
+        <column xsi:type="decimal" name="base_card_price_refunded" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Price Refunded"/>
+        <column xsi:type="decimal" name="tax_amount_refunded" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Tax Amount Refunded"/>
+        <column xsi:type="decimal" name="base_tax_amount_refunded" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Tax Amount Refunded"/>
+        <column xsi:type="text" name="wrap_name" nullable="true" comment="Gift Wrap Name"/>
+        <column xsi:type="text" name="card_name" nullable="true" comment="Card Name"/>
+        <column xsi:type="decimal" name="base_card_tax_amount_invoiced" scale="0" precision="10" unsigned="false"
+                nullable="true" comment="Base Card Tax Amount Invoiced"/>
+        <column xsi:type="decimal" name="card_tax_amount_invoiced" scale="0" precision="10" unsigned="false"
+                nullable="true" comment="Card Tax Amount Invoiced"/>
+        <column xsi:type="decimal" name="base_card_tax_amount_refunded" scale="0" precision="10" unsigned="false"
+                nullable="true" comment="Base Card Tax Amount Refunded"/>
+        <column xsi:type="decimal" name="card_tax_amount_refunded" scale="0" precision="10" unsigned="false"
+                nullable="true" comment="Card Tax Amount Refunded"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+    <table name="amasty_giftwrap_order_item" resource="default" engine="innodb" comment="Gift Wrap Order Item Table">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="order_item_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Order Item ID"/>
+        <column xsi:type="int" name="quote_wrap_id" padding="11" unsigned="false" nullable="false" identity="false"
+                comment="Quote Wrap ID"/>
+        <column xsi:type="decimal" name="wrap_qty" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Wrapping Requested Qty"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_AE063C3C4660244318C74CEDDE5C0F99"
+                    table="amasty_giftwrap_order_item" column="order_item_id" referenceTable="sales_order_item"
+                    referenceColumn="item_id" onDelete="CASCADE"/>
+    </table>
+    <table name="amasty_giftwrap_invoice" resource="default" engine="innodb" comment="Gift Wrap Invoice Table">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="invoice_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Quote ID"/>
+        <column xsi:type="decimal" name="total_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Total Price"/>
+        <column xsi:type="decimal" name="base_total_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Total Price"/>
+        <column xsi:type="decimal" name="tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Tax Amount"/>
+        <column xsi:type="decimal" name="base_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Tax Amount"/>
+        <column xsi:type="decimal" name="total_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Total Tax Amount"/>
+        <column xsi:type="decimal" name="base_total_tax_amount" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Total Tax Amount"/>
+        <column xsi:type="decimal" name="total_price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Total Price Incl. Tax"/>
+        <column xsi:type="decimal" name="base_total_price_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Total Price Incl. Tax"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_2A79F742DED261CF37D5BCD6641A4508" table="amasty_giftwrap_invoice"
+                    column="invoice_id" referenceTable="sales_invoice" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="AMASTY_GIFTWRAP_INVOICE_INVOICE_ID">
+            <column name="invoice_id"/>
+        </constraint>
+    </table>
+    <table name="amasty_giftwrap_creditmemo" resource="default" engine="innodb" comment="Gift Wrap Creditmemo Table">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="creditmemo_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Creditmemo ID"/>
+        <column xsi:type="decimal" name="total_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Total Price"/>
+        <column xsi:type="decimal" name="base_total_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Total Price"/>
+        <column xsi:type="decimal" name="tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Tax Amount"/>
+        <column xsi:type="decimal" name="base_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Tax Amount"/>
+        <column xsi:type="decimal" name="total_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Total Tax Amount"/>
+        <column xsi:type="decimal" name="base_total_tax_amount" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Total Tax Amount"/>
+        <column xsi:type="decimal" name="total_price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Total Price Incl. Tax"/>
+        <column xsi:type="decimal" name="base_total_price_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Total Price Incl. Tax"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_634CDAEFE39F26653ADB4926E518C123"
+                    table="amasty_giftwrap_creditmemo" column="creditmemo_id" referenceTable="sales_creditmemo"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="AMASTY_GIFTWRAP_CREDITMEMO_CREDITMEMO_ID">
+            <column name="creditmemo_id"/>
+        </constraint>
+    </table>
+    <table name="amasty_giftwrap_quote_address_wrap" resource="default" engine="innodb"
+           onCreate="amMigrateDataFromAnotherTableIfExists(amasty_giftwrap_quote_address_item)"
+           comment="Gift Wrap Quote Address Item Table">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="card_id" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Message Card ID"/>
+        <column xsi:type="int" name="wrap_id" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Wrap ID"/>
+        <column xsi:type="decimal" name="price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Price"/>
+        <column xsi:type="decimal" name="base_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Price"/>
+        <column xsi:type="decimal" name="card_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Card Price"/>
+        <column xsi:type="decimal" name="base_card_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Card Price"/>
+        <column xsi:type="decimal" name="tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Tax Amount"/>
+        <column xsi:type="decimal" name="base_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Tax Amount"/>
+        <column xsi:type="decimal" name="card_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Card Tax Amount"/>
+        <column xsi:type="decimal" name="base_card_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Card Tax Amount"/>
+        <column xsi:type="decimal" name="price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Price Incl. Tax"/>
+        <column xsi:type="decimal" name="base_price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Price Incl. Tax"/>
+        <column xsi:type="decimal" name="card_price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Card Price Incl. Tax"/>
+        <column xsi:type="decimal" name="base_card_price_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Card Price Incl. Tax"/>
+        <column xsi:type="int" name="quote_address_id" padding="10" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Quote Address ID" onCreate="migrateDataFrom(quote_address_item_id)"/>
+        <column xsi:type="int" name="is_receipt_hidden" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Is Receipt Hidden Flag"/>
+        <column xsi:type="text" name="gift_message" nullable="true" comment="Gift Message"/>
+        <column xsi:type="varchar" name="wrap_name" nullable="true" length="255" comment="Quote Address Wrap Name"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="AMASTY_GIFTWRAP_QUOTE_ADDRESS_WRAP_QUOTE_ADDRESS_ID" disabled="true">
+            <column name="quote_address_id"/>
+        </constraint>
+        <index referenceId="AMASTY_GIFTWRAP_QUOTE_ADDRESS_WRAP_CARD_ID" indexType="btree" disabled="true">
+            <column name="card_id"/>
+        </index>
+        <index referenceId="AMASTY_GIFTWRAP_QUOTE_ADDRESS_WRAP_WRAP_ID" indexType="btree" disabled="true">
+            <column name="wrap_id"/>
+        </index>
+    </table>
+    <table name="amasty_giftwrap_quote_address_item" resource="default" engine="innodb"
+           comment="Gift Wrap Quote Item Table">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="quote_item_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Quote Item ID"/>
+        <column xsi:type="int" name="quote_wrap_id" padding="11" unsigned="false" nullable="false" identity="false"
+                comment="Quote Wrap ID"/>
+        <column xsi:type="decimal" name="wrap_qty" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Wrapping Requested Qty"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_0D15AEE7AC7A968FFA48921E479CD91A"
+                    table="amasty_giftwrap_quote_address_wrap" column="quote_item_id"
+                    referenceTable="quote_address_item" referenceColumn="address_item_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_8CF204C5CED1A8FCB21084B4BBFCF7C3"
+                    table="amasty_giftwrap_quote_address_wrap" column="quote_wrap_id"
+                    referenceTable="amasty_giftwrap_quote_address_wrap" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="AMASTY_GIFTWRAP_QUOTE_ADDR_ITEM_QUOTE_ITEM_ID_QUOTE_WRAP_ID">
+            <column name="quote_item_id"/>
+            <column name="quote_wrap_id"/>
+        </constraint>
+    </table>
+</schema>

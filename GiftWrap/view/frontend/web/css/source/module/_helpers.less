@@ -1,0 +1,55 @@
+//
+//  Helpers
+//  _____________________________________
+
+._am-slide-down {
+    & {
+        animation: slideDown .2s;
+    }
+
+    @keyframes slideDown {
+        0% {
+            opacity: 0;
+            transform: translateY(-10%);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+._am-check-ico {
+    margin: 0 0 3px 0;
+    border: solid #fff;
+    border-width: 0 1px 1px 0;
+    content: '';
+    transform: rotate(45deg);
+}
+
+._am-clear-btn {
+    &,
+    &:focus,
+    &:hover,
+    &:active,
+    &:not(.primary) {
+        outline: none;
+        border: none;
+        background: none;
+        box-shadow: none;
+    }
+}
+
+.am-word-break {
+    & {
+        word-wrap: break-word;
+        word-break: break-word;
+    }
+
+    .ie11 & {
+        word-break: break-all;
+    }
+}
+
+.am-order(5);
