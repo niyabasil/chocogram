@@ -40,6 +40,30 @@ define([
          * @param {Object} item
          * @return {null}
          */
+        getCardSrc: function (item) {
+            if (item['card_image']) {
+                return item['card_image'];
+            }
+
+            return null;
+        },
+
+        /**
+         * @param {Object} item
+         * @return {null}
+         */
+        getCardAlt: function (item) {
+            if (item['card']) {
+                return item['card'];
+            }
+
+            return null;
+        },
+
+        /**
+         * @param {Object} item
+         * @return {null}
+         */
         getSrc: function (item) {
             if (item['image']) {
                 return item['image'];

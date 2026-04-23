@@ -18,7 +18,9 @@
             <!-- ko if: ($parent.card.length > 0)-->
             <li class="amwrap-option">
                 <span class="amwrap-label" data-bind="i18n: 'Gift Card'"></span>
-                <span class="amwrap-value" data-bind="text: $parent.card"></span>
+                <div class="amwrap-image">
+                    <img data-bind="attr: {'src': getCardSrc($parent), 'alt': getCardAlt($parent), 'title': getCardAlt($parent) }"/>
+                </div>
             </li>
             <!-- /ko -->
             <li class="amwrap-option">
