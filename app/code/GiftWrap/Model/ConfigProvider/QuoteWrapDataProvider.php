@@ -174,6 +174,24 @@ class QuoteWrapDataProvider
     }
 
     /**
+     * @param $cardId
+     * @return string
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    private function getCardImage($cardId)
+    {
+        $cards = $this->getCards();
+        if (!isset($cards[$cardId])) {
+            return '';
+        }
+        return $this->imageProcessor->getResizedUrl(
+            $cards[$cardId]->getImage(),
+            self::IMAGE_WIDTH,
+            self::IMAGE_HEIGHT
+        );
+    }
+
+    /**
      * @param $wrapId
      * @return string
      * @throws \Magento\Framework\Exception\LocalizedException
@@ -231,6 +249,7 @@ class QuoteWrapDataProvider
                         self::IMAGE_HEIGHT
                     ),
                     'card' => $this->getCardName($quoteWrapData['card_id']),
+                    'card_image' => $this->getCardImage($quoteWrapData['card_id']),
                     'price' => $this->priceConverter->convertPrice($price),
                     'message' => $this->escaper->escapeHtml($quoteWrapData['gift_message'] ?? ''),
                     'products' => $this->getProducts($quoteWrapId)
